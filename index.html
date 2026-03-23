@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dead Man's Vault — Privacy Policy</title>
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-l: #E8C97A;
+    --green: #1A3516;
+    --black: #0A0C0A;
+    --card: #111410;
+    --border: #2A3028;
+    --text: #F0EDD8;
+    --text2: #9A9880;
+    --text3: #5A5848;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: var(--black); color: var(--text); line-height: 1.7; }
+  header { background: var(--card); border-bottom: 0.5px solid var(--border); padding: 1.5rem 2rem; display: flex; align-items: center; gap: 1rem; position: sticky; top: 0; z-index: 10; }
+  .logo { width: 40px; height: 40px; border-radius: 10px; background: var(--green); border: 1px solid #3A3020; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .logo svg { width: 22px; height: 22px; }
+  .header-text h1 { font-size: 1rem; font-weight: 600; color: var(--gold-l); }
+  .header-text p { font-size: 0.78rem; color: var(--text2); }
+  .lang-bar { background: var(--card); border-bottom: 0.5px solid var(--border); padding: .6rem 2rem; display: flex; gap: .5rem; flex-wrap: wrap; }
+  .lang-btn { background: transparent; border: 0.5px solid var(--border); border-radius: 6px; padding: .3rem .8rem; font-size: .8rem; color: var(--text2); cursor: pointer; transition: all .15s; }
+  .lang-btn.active, .lang-btn:hover { border-color: #3A3020; color: var(--gold); background: var(--green); }
+  .content { max-width: 780px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+  .section { display: none; }
+  .section.active { display: block; }
+  .last-updated { font-size: .78rem; color: var(--text3); margin-bottom: 2rem; padding: .5rem .8rem; background: var(--card); border: 0.5px solid var(--border); border-radius: 6px; display: inline-block; }
+  h2 { font-size: 1.35rem; font-weight: 600; color: var(--gold-l); margin: 2rem 0 .6rem; padding-bottom: .4rem; border-bottom: 0.5px solid var(--border); }
+  h3 { font-size: 1rem; font-weight: 500; color: var(--gold); margin: 1.4rem 0 .4rem; }
+  p { font-size: .93rem; color: var(--text2); margin-bottom: .9rem; }
+  ul { padding-left: 1.4rem; margin-bottom: .9rem; }
+  li { font-size: .93rem; color: var(--text2); margin-bottom: .3rem; }
+  .highlight { background: var(--green); border: 0.5px solid #3A3020; border-radius: 10px; padding: 1rem 1.2rem; margin: 1.2rem 0; }
+  .highlight p { color: var(--gold-l); margin: 0; font-weight: 500; }
+  .highlight .sub { color: var(--text2); font-size: .85rem; font-weight: 400; margin-top: .3rem; }
+  .no-collect { display: flex; align-items: flex-start; gap: .8rem; background: var(--card); border: 0.5px solid var(--border); border-radius: 8px; padding: .8rem 1rem; margin-bottom: .6rem; }
+  .no-collect .icon { width: 20px; height: 20px; border-radius: 50%; background: var(--green); border: 0.5px solid #3A3020; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .no-collect .icon svg { width: 10px; height: 10px; }
+  .no-collect p { margin: 0; font-size: .88rem; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .85rem; }
+  th { background: var(--card); color: var(--gold); padding: .6rem .8rem; text-align: left; border: 0.5px solid var(--border); font-weight: 500; }
+  td { padding: .6rem .8rem; border: 0.5px solid var(--border); color: var(--text2); vertical-align: top; }
+  tr:nth-child(even) td { background: #0d0f0d; }
+  .contact-card { background: var(--card); border: 0.5px solid var(--border); border-radius: 10px; padding: 1rem 1.2rem; margin-top: 1rem; }
+  .contact-card a { color: var(--gold); text-decoration: none; }
+  footer { text-align: center; padding: 2rem; font-size: .75rem; color: var(--text3); border-top: 0.5px solid var(--border); }
+  a { color: var(--gold); }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <svg viewBox="0 0 24 24" fill="none">
+      <path d="M12 2L20 6V12C20 17 16 21 12 23C8 21 4 17 4 12V6Z" fill="#1A3516" stroke="#C9A84C" stroke-width="1.5"/>
+      <rect x="8" y="13" width="8" height="6" rx="1.5" fill="#C9A84C" fill-opacity=".15" stroke="#C9A84C" stroke-width="1.2"/>
+      <path d="M9.5 13V10.5A2.5 2.5 0 0 1 14.5 10.5V13" stroke="#C9A84C" stroke-width="1.4" stroke-linecap="round"/>
+      <circle cx="12" cy="16" r="1" fill="#C9A84C"/>
+    </svg>
+  </div>
+  <div class="header-text">
+    <h1>Dead Man's Vault</h1>
+    <p>Privacy Policy</p>
+  </div>
+</header>
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('en', this)">English</button>
+  <button class="lang-btn" onclick="setLang('pt', this)">Português (PT)</button>
+  <button class="lang-btn" onclick="setLang('br', this)">Português (BR)</button>
+  <button class="lang-btn" onclick="setLang('de', this)">Deutsch</button>
+  <button class="lang-btn" onclick="setLang('fr', this)">Français</button>
+</div>
+<div class="content">
+
+<div class="section active" id="lang-en">
+  <div class="last-updated">Last updated: January 2025</div>
+  <div class="highlight">
+    <p>Dead Man's Vault does not collect, transmit, or store any personal data on external servers.</p>
+    <p class="sub">All your secrets and settings are encrypted locally on your device and never leave it without your explicit action.</p>
+  </div>
+  <h2>1. Who we are</h2>
+  <p>Dead Man's Vault ("the App", "we", "our") is an Android application developed and published as an individual developer. For any privacy-related questions, contact us at the address listed in section 8.</p>
+  <h2>2. What data we do NOT collect</h2>
+  <p>We do not collect, store, process, or transmit any of the following:</p>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>The content of your secrets or vault entries</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Your PIN or biometric data</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Your name, email address, or emergency contact details</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Location data, device identifiers, or usage analytics</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Crash logs or diagnostic data sent to our servers</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Advertising identifiers beyond what Google AdMob manages autonomously (free tier only)</p></div>
+  <h2>3. Where your data is stored</h2>
+  <p>All data entered into the App is stored exclusively on your device, encrypted with AES-256-GCM using the Android Hardware Security Module. The encryption key never leaves your device.</p>
+  <h3>Optional Google Drive backup (Pro tier)</h3>
+  <p>If you choose to enable the backup feature, an encrypted copy of your vault is written to your personal Google Drive account, in the private <strong>appDataFolder</strong> space only accessible by this App. We have no access to this folder.</p>
+  <h2>4. Emergency email delivery</h2>
+  <p>If the dead man's switch is triggered, the App composes an email on your behalf using your own Google account via the Gmail API. This action is performed entirely on your device. We never see, intercept, or store the content of these emails.</p>
+  <h2>5. Third-party services</h2>
+  <table>
+    <tr><th>Service</th><th>Purpose</th><th>Data involved</th><th>Tier</th></tr>
+    <tr><td>Google Play Billing</td><td>Subscription management</td><td>Purchase tokens (managed by Google)</td><td>Pro</td></tr>
+    <tr><td>Google AdMob</td><td>Advertising</td><td>Advertising ID (managed by Google)</td><td>Free</td></tr>
+    <tr><td>Gmail API</td><td>Emergency email delivery</td><td>Your Google account, used on-device only</td><td>Both</td></tr>
+    <tr><td>Google Drive API</td><td>Encrypted vault backup</td><td>Encrypted file in your private appDataFolder</td><td>Pro</td></tr>
+  </table>
+  <p>Each service is governed by Google's Privacy Policy: <a href="https://policies.google.com/privacy">policies.google.com/privacy</a></p>
+  <h2>6. Device transfer (Pro tier)</h2>
+  <p>Pro subscribers can transfer their vault to a new device by restoring the encrypted backup from Google Drive. No data passes through our servers during this process.</p>
+  <h2>7. Children's privacy</h2>
+  <p>The App is not directed at children under 13 (or 16 in the EU). We do not knowingly collect data from children.</p>
+  <h2>8. Your rights (GDPR)</h2>
+  <p>Since we do not collect personal data on our servers, most GDPR rights are exercised directly on your device by deleting the App or using "Delete vault" in Settings.</p>
+  <div class="contact-card"><p>Email: <a href="mailto:privacy@deadmansvault.app">privacy@deadmansvault.app</a></p><p style="font-size:.82rem;color:var(--text3);margin-top:.4rem">We will respond within 30 days as required by GDPR Article 12.</p></div>
+  <h2>9. Changes to this policy</h2>
+  <p>Material changes will be notified via an in-app notice. Continued use after changes constitutes acceptance of the revised policy.</p>
+</div>
+
+<div class="section" id="lang-pt">
+  <div class="last-updated">Última atualização: janeiro de 2025</div>
+  <div class="highlight">
+    <p>O Dead Man's Vault não recolhe, transmite nem armazena quaisquer dados pessoais em servidores externos.</p>
+    <p class="sub">Todos os teus segredos e configurações são encriptados localmente no teu dispositivo e nunca o abandonam sem a tua ação explícita.</p>
+  </div>
+  <h2>1. Quem somos</h2>
+  <p>O Dead Man's Vault é uma aplicação Android desenvolvida e publicada a título individual. Para questões de privacidade, contacta-nos através do endereço indicado na secção 8.</p>
+  <h2>2. Que dados NÃO recolhemos</h2>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>O conteúdo dos teus segredos ou entradas do cofre</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>O teu PIN ou dados biométricos</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>O teu nome, endereço de email ou dados do contacto de emergência</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Dados de localização, identificadores de dispositivo ou análises de utilização</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Registos de erros enviados para os nossos servidores</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Identificadores publicitários além do que o Google AdMob gere autonomamente</p></div>
+  <h2>3. Onde os teus dados são armazenados</h2>
+  <p>Todos os dados são armazenados exclusivamente no teu dispositivo, encriptados com AES-256-GCM através do HSM do Android. A chave nunca abandona o teu dispositivo.</p>
+  <h3>Cópia de segurança opcional no Google Drive (Pro)</h3>
+  <p>Se ativares o backup, uma cópia encriptada é guardada na tua conta Google Drive no espaço privado <strong>appDataFolder</strong>. Não temos acesso a esta pasta.</p>
+  <h2>4. Envio de email de emergência</h2>
+  <p>Se o interruptor de segurança for acionado, a app compõe um email em teu nome via Gmail API, inteiramente no teu dispositivo. Nunca vemos o conteúdo desses emails.</p>
+  <h2>5. Serviços de terceiros</h2>
+  <table>
+    <tr><th>Serviço</th><th>Finalidade</th><th>Dados</th><th>Versão</th></tr>
+    <tr><td>Google Play Billing</td><td>Subscrições</td><td>Tokens de compra (Google)</td><td>Pro</td></tr>
+    <tr><td>Google AdMob</td><td>Publicidade</td><td>ID publicitário (Google)</td><td>Gratuita</td></tr>
+    <tr><td>Gmail API</td><td>Email de emergência</td><td>Conta Google, só no dispositivo</td><td>Ambas</td></tr>
+    <tr><td>Google Drive API</td><td>Backup encriptado</td><td>Ficheiro no teu appDataFolder</td><td>Pro</td></tr>
+  </table>
+  <h2>6. Transferência de dispositivo (Pro)</h2>
+  <p>Os subscritores Pro podem transferir o cofre para um novo dispositivo via backup no Drive. Nenhum dado passa pelos nossos servidores.</p>
+  <h2>7. Privacidade de menores</h2>
+  <p>A app não se destina a menores de 13 anos (16 na UE). Não recolhemos dados de menores conscientemente.</p>
+  <h2>8. Os teus direitos (RGPD)</h2>
+  <p>A maioria dos direitos RGPD exercem-se diretamente no dispositivo via "Apagar cofre" nas Definições.</p>
+  <div class="contact-card"><p>Email: <a href="mailto:privacy@deadmansvault.app">privacy@deadmansvault.app</a></p><p style="font-size:.82rem;color:var(--text3);margin-top:.4rem">Respondemos em 30 dias conforme o artigo 12.º do RGPD.</p></div>
+  <h2>9. Alterações</h2>
+  <p>Alterações materiais serão comunicadas por aviso na app. O uso continuado implica aceitação.</p>
+</div>
+
+<div class="section" id="lang-br">
+  <div class="last-updated">Última atualização: janeiro de 2025</div>
+  <div class="highlight">
+    <p>O Dead Man's Vault não coleta, transmite nem armazena dados pessoais em servidores externos.</p>
+    <p class="sub">Todos os seus segredos são criptografados localmente e nunca saem do dispositivo sem sua ação explícita.</p>
+  </div>
+  <h2>1. Quem somos</h2>
+  <p>O Dead Man's Vault é um aplicativo Android desenvolvido por um desenvolvedor individual. Para dúvidas sobre privacidade, entre em contato pelo endereço da seção 8.</p>
+  <h2>2. Dados que NÃO coletamos</h2>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>O conteúdo dos seus segredos ou entradas do cofre</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Seu PIN ou dados biométricos</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Seu nome, e-mail ou dados do contato de emergência</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Dados de localização, identificadores ou análises de uso</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Logs de erros enviados para nossos servidores</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Identificadores publicitários além do que o AdMob gerencia</p></div>
+  <h2>3. Onde seus dados são armazenados</h2>
+  <p>Todos os dados são armazenados exclusivamente no seu dispositivo, criptografados com AES-256-GCM via HSM do Android. A chave nunca sai do dispositivo.</p>
+  <h3>Backup opcional no Google Drive (Pro)</h3>
+  <p>Se ativar o backup, uma cópia criptografada é salva na sua conta Google Drive no espaço privado <strong>appDataFolder</strong>. Não temos acesso a essa pasta.</p>
+  <h2>4. Envio de e-mail de emergência</h2>
+  <p>Se o interruptor for acionado, o app compõe um e-mail via Gmail API inteiramente no seu dispositivo. Nunca vemos o conteúdo desses e-mails.</p>
+  <h2>5. Serviços de terceiros</h2>
+  <table>
+    <tr><th>Serviço</th><th>Finalidade</th><th>Dados</th><th>Versão</th></tr>
+    <tr><td>Google Play Billing</td><td>Assinaturas</td><td>Tokens de compra (Google)</td><td>Pro</td></tr>
+    <tr><td>Google AdMob</td><td>Publicidade</td><td>ID publicitário (Google)</td><td>Gratuita</td></tr>
+    <tr><td>Gmail API</td><td>E-mail de emergência</td><td>Conta Google, só no dispositivo</td><td>Ambas</td></tr>
+    <tr><td>Google Drive API</td><td>Backup criptografado</td><td>Arquivo no seu appDataFolder</td><td>Pro</td></tr>
+  </table>
+  <h2>6. Troca de dispositivo (Pro)</h2>
+  <p>Assinantes Pro podem transferir o cofre via backup no Drive. Nenhum dado passa por nossos servidores.</p>
+  <h2>7. Privacidade de menores</h2>
+  <p>O app não é direcionado a menores de 13 anos. Não coletamos dados de menores.</p>
+  <h2>8. Seus direitos (LGPD)</h2>
+  <p>A maioria dos direitos pode ser exercida no dispositivo via "Excluir cofre" nas Configurações.</p>
+  <div class="contact-card"><p>E-mail: <a href="mailto:privacy@deadmansvault.app">privacy@deadmansvault.app</a></p></div>
+  <h2>9. Alterações</h2>
+  <p>Alterações serão comunicadas por aviso no app. O uso continuado implica aceitação.</p>
+</div>
+
+<div class="section" id="lang-de">
+  <div class="last-updated">Zuletzt aktualisiert: Januar 2025</div>
+  <div class="highlight">
+    <p>Dead Man's Vault erfasst, überträgt oder speichert keine personenbezogenen Daten auf externen Servern.</p>
+    <p class="sub">Alle Daten werden lokal verschlüsselt und verlassen das Gerät nie ohne deine ausdrückliche Handlung.</p>
+  </div>
+  <h2>1. Wer wir sind</h2>
+  <p>Dead Man's Vault ist eine Android-App eines Einzelentwicklers. Kontakt für Datenschutzfragen: siehe Abschnitt 8.</p>
+  <h2>2. Daten, die wir NICHT erheben</h2>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Den Inhalt deiner Geheimnisse</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Deinen PIN oder biometrische Daten</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Deinen Namen, E-Mail oder Notfallkontaktdaten</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Standortdaten, Gerätekennungen oder Nutzungsanalysen</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Absturzprotokolle an unsere Server</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Werbe-IDs über AdMob hinaus</p></div>
+  <h2>3. Datenspeicherung</h2>
+  <p>Alle Daten werden ausschließlich auf deinem Gerät gespeichert, AES-256-GCM verschlüsselt via Android HSM. Der Schlüssel verlässt das Gerät nie.</p>
+  <h2>4. Notfall-E-Mail</h2>
+  <p>Beim Auslösen des Totmann-Schalters sendet die App eine E-Mail via Gmail API — ausschließlich auf deinem Gerät. Wir sehen diese E-Mails nie.</p>
+  <h2>5. Drittanbieter</h2>
+  <table>
+    <tr><th>Dienst</th><th>Zweck</th><th>Daten</th><th>Version</th></tr>
+    <tr><td>Google Play Billing</td><td>Abonnements</td><td>Kauftokens (Google)</td><td>Pro</td></tr>
+    <tr><td>Google AdMob</td><td>Werbung</td><td>Werbe-ID (Google)</td><td>Kostenlos</td></tr>
+    <tr><td>Gmail API</td><td>Notfall-E-Mail</td><td>Google-Konto, nur auf Gerät</td><td>Beide</td></tr>
+    <tr><td>Google Drive API</td><td>Verschlüsselte Sicherung</td><td>Datei im privaten appDataFolder</td><td>Pro</td></tr>
+  </table>
+  <h2>6. Gerätewechsel (Pro)</h2>
+  <p>Pro-Abonnenten können den Tresor über die Drive-Sicherung übertragen. Keine Daten laufen über unsere Server.</p>
+  <h2>7. Kinderschutz</h2>
+  <p>Die App richtet sich nicht an Kinder unter 13 Jahren (16 in der EU).</p>
+  <h2>8. Deine Rechte (DSGVO)</h2>
+  <p>DSGVO-Rechte werden direkt auf dem Gerät ausgeübt — App löschen oder "Tresor löschen" in den Einstellungen.</p>
+  <div class="contact-card"><p>E-Mail: <a href="mailto:privacy@deadmansvault.app">privacy@deadmansvault.app</a></p><p style="font-size:.82rem;color:var(--text3);margin-top:.4rem">Antwort innerhalb von 30 Tagen gemäß Art. 12 DSGVO.</p></div>
+  <h2>9. Änderungen</h2>
+  <p>Wesentliche Änderungen werden per In-App-Hinweis mitgeteilt.</p>
+</div>
+
+<div class="section" id="lang-fr">
+  <div class="last-updated">Dernière mise à jour : janvier 2025</div>
+  <div class="highlight">
+    <p>Dead Man's Vault ne collecte, ne transmet ni ne stocke aucune donnée personnelle sur des serveurs externes.</p>
+    <p class="sub">Toutes vos données sont chiffrées localement et ne quittent jamais l'appareil sans votre action explicite.</p>
+  </div>
+  <h2>1. Qui nous sommes</h2>
+  <p>Dead Man's Vault est une application Android développée par un développeur individuel. Contact pour la confidentialité : voir section 8.</p>
+  <h2>2. Données que nous ne collectons PAS</h2>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Le contenu de vos secrets</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Votre code PIN ou données biométriques</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Votre nom, e-mail ou coordonnées d'urgence</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Données de localisation ou analyses d'utilisation</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Journaux d'erreurs envoyés à nos serveurs</p></div>
+  <div class="no-collect"><div class="icon"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="#C9A84C" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div><p>Identifiants publicitaires au-delà d'AdMob</p></div>
+  <h2>3. Stockage des données</h2>
+  <p>Toutes les données sont stockées exclusivement sur votre appareil, chiffrées AES-256-GCM via le HSM Android. La clé ne quitte jamais l'appareil.</p>
+  <h2>4. Envoi d'e-mail d'urgence</h2>
+  <p>Si l'interrupteur est déclenché, l'App compose un e-mail via Gmail API entièrement sur votre appareil. Nous ne voyons jamais ces e-mails.</p>
+  <h2>5. Services tiers</h2>
+  <table>
+    <tr><th>Service</th><th>Finalité</th><th>Données</th><th>Version</th></tr>
+    <tr><td>Google Play Billing</td><td>Abonnements</td><td>Jetons d'achat (Google)</td><td>Pro</td></tr>
+    <tr><td>Google AdMob</td><td>Publicité</td><td>ID publicitaire (Google)</td><td>Gratuite</td></tr>
+    <tr><td>Gmail API</td><td>E-mail d'urgence</td><td>Compte Google, sur appareil uniquement</td><td>Les deux</td></tr>
+    <tr><td>Google Drive API</td><td>Sauvegarde chiffrée</td><td>Fichier dans votre appDataFolder</td><td>Pro</td></tr>
+  </table>
+  <h2>6. Changement d'appareil (Pro)</h2>
+  <p>Les abonnés Pro peuvent transférer le coffre via la sauvegarde Drive. Aucune donnée ne transite par nos serveurs.</p>
+  <h2>7. Confidentialité des enfants</h2>
+  <p>L'App ne s'adresse pas aux moins de 13 ans (16 dans l'UE).</p>
+  <h2>8. Vos droits (RGPD)</h2>
+  <p>La plupart des droits RGPD s'exercent sur l'appareil via "Supprimer le coffre" dans les Paramètres.</p>
+  <div class="contact-card"><p>E-mail : <a href="mailto:privacy@deadmansvault.app">privacy@deadmansvault.app</a></p><p style="font-size:.82rem;color:var(--text3);margin-top:.4rem">Réponse dans les 30 jours conformément à l'article 12 du RGPD.</p></div>
+  <h2>9. Modifications</h2>
+  <p>Les changements substantiels seront notifiés dans l'App.</p>
+</div>
+
+</div>
+<footer>&copy; 2025 Dead Man's Vault &middot; <a href="mailto:privacy@deadmansvault.app" style="color:var(--text3)">privacy@deadmansvault.app</a></footer>
+<script>
+function setLang(lang, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('lang-' + lang).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
