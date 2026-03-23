@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Dead Man's Vault — Encrypted secret keeper with dead man's switch. Your secrets, protected. Automatically shared if something happens to you.">
+<meta property="og:title" content="Dead Man's Vault">
+<meta property="og:description" content="Encrypted secrets with a dead man's switch. Your data never leaves your device.">
+<meta property="og:type" content="website">
+<title>Dead Man's Vault — Your secrets, protected</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#C9A84C;--gold-l:#E8C97A;--gold-d:#8B6F2E;--gold-b:#3A3020;
+  --green:#2D5A27;--green-d:#1A3516;--green-l:#3D7A35;
+  --black:#0A0C0A;--card:#111410;--card2:#181C17;
+  --border:#2A3028;--text:#F0EDD8;--text2:#9A9880;--text3:#5A5848;
+  --danger:#C0392B;--success:#27AE60;--warn:#E8A020;
+}
+html{scroll-behavior:smooth}
+body{font-family:system-ui,-apple-system,sans-serif;background:var(--black);color:var(--text);line-height:1.7;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,12,10,.92);backdrop-filter:blur(12px);border-bottom:0.5px solid var(--border);padding:.9rem 2rem;display:flex;align-items:center;gap:1rem}
+.nav-logo{display:flex;align-items:center;gap:.6rem;text-decoration:none}
+.nav-logo-icon{width:32px;height:32px;border-radius:8px;background:var(--green-d);border:1px solid var(--gold-b);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-logo-icon svg{width:18px;height:18px}
+.nav-logo-text{font-size:.95rem;font-weight:600;color:var(--gold-l)}
+.nav-links{display:flex;gap:1.5rem;margin-left:auto;align-items:center}
+.nav-links a{font-size:.85rem;color:var(--text2);text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold);color:var(--black);padding:.45rem 1.1rem;border-radius:7px;font-size:.85rem;font-weight:600;text-decoration:none;transition:background .15s}
+.nav-cta:hover{background:var(--gold-l);color:var(--black)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:7rem 1.5rem 5rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 40%, rgba(45,90,39,.18) 0%, transparent 70%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--green-d);border:0.5px solid var(--gold-b);border-radius:20px;padding:.35rem 1rem;font-size:.78rem;color:var(--gold);margin-bottom:1.5rem}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+h1{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:700;line-height:1.15;color:var(--text);margin-bottom:1rem;letter-spacing:-.02em}
+h1 span{color:var(--gold)}
+.hero-sub{font-size:clamp(1rem,2vw,1.2rem);color:var(--text2);max-width:560px;margin:0 auto 2.5rem;line-height:1.6}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem}
+.btn-primary{background:var(--gold);color:var(--black);padding:.8rem 2rem;border-radius:10px;font-size:1rem;font-weight:600;text-decoration:none;transition:all .15s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-primary:hover{background:var(--gold-l);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--text2);padding:.8rem 2rem;border-radius:10px;font-size:1rem;border:0.5px solid var(--border);text-decoration:none;transition:all .15s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-ghost:hover{border-color:var(--gold-d);color:var(--text)}
+.hero-note{font-size:.8rem;color:var(--text3)}
+
+/* PHONE MOCKUP */
+.phone-wrap{display:flex;justify-content:center;margin-bottom:5rem}
+.phone-frame{width:220px;background:var(--black);border:1.5px solid var(--border);border-radius:30px;overflow:hidden;box-shadow:0 0 60px rgba(201,168,76,.08)}
+.phone-bar{height:26px;background:var(--black);display:flex;align-items:center;justify-content:center}
+.phone-notch{width:56px;height:14px;background:#000;border-radius:0 0 9px 9px}
+.phone-screen{padding:14px;background:var(--black)}
+.ps-status{display:flex;align-items:center;gap:5px;margin-bottom:10px}
+.ps-dot{width:7px;height:7px;border-radius:50%;background:var(--success)}
+.ps-text{font-size:9px;color:var(--text2);flex:1}
+.ps-badge{background:var(--green-d);border:0.5px solid var(--gold-b);border-radius:3px;padding:1px 5px;font-size:7px;color:var(--gold-l)}
+.ps-ring{display:flex;justify-content:center;margin:8px 0}
+.ps-btn{width:100%;padding:8px;border-radius:7px;border:none;background:var(--gold);color:var(--black);font-size:11px;font-weight:600;cursor:pointer;margin-bottom:6px}
+.ps-ghost{width:100%;padding:7px;border-radius:7px;border:0.5px solid var(--border);background:transparent;color:var(--text2);font-size:10px;cursor:pointer}
+
+/* SECTIONS */
+section{padding:5rem 1.5rem;max-width:1100px;margin:0 auto}
+.section-label{font-size:.75rem;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.75rem}
+h2{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;color:var(--text);margin-bottom:1rem;line-height:1.2}
+.section-sub{font-size:1rem;color:var(--text2);max-width:560px;margin-bottom:3rem;line-height:1.6}
+
+/* HOW IT WORKS */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
+.step-card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:1.5rem;position:relative}
+.step-card::before{content:attr(data-n);position:absolute;top:1.25rem;right:1.25rem;font-size:2rem;font-weight:700;color:var(--border);line-height:1}
+.step-icon{width:44px;height:44px;border-radius:10px;background:var(--green-d);border:0.5px solid var(--gold-b);display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
+.step-icon svg{width:22px;height:22px}
+.step-title{font-size:1rem;font-weight:600;color:var(--text);margin-bottom:.5rem}
+.step-desc{font-size:.88rem;color:var(--text2);line-height:1.6}
+
+/* USE CASES */
+.use-cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem}
+.use-card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:1.5rem}
+.use-card.featured{border-color:var(--gold-b);background:var(--green-d)}
+.use-tag{display:inline-block;font-size:.72rem;padding:.2rem .6rem;border-radius:4px;background:var(--card2);color:var(--text3);margin-bottom:.75rem}
+.use-card.featured .use-tag{background:rgba(201,168,76,.15);color:var(--gold)}
+.use-title{font-size:1rem;font-weight:600;color:var(--text);margin-bottom:.5rem}
+.use-desc{font-size:.875rem;color:var(--text2);line-height:1.6}
+
+/* FEATURES */
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem}
+.feat-card{background:var(--card);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem;display:flex;gap:.9rem}
+.feat-icon{width:36px;height:36px;border-radius:8px;background:var(--green-d);border:0.5px solid var(--gold-b);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.feat-icon svg{width:18px;height:18px}
+.feat-title{font-size:.92rem;font-weight:600;color:var(--text);margin-bottom:.2rem}
+.feat-desc{font-size:.82rem;color:var(--text2);line-height:1.5}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;max-width:640px;margin:0 auto}
+.plan{background:var(--card);border:0.5px solid var(--border);border-radius:16px;padding:1.75rem;position:relative}
+.plan.featured{border:1.5px solid var(--gold-d)}
+.plan-popular{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--black);font-size:.72rem;font-weight:700;padding:.25rem .9rem;border-radius:20px;white-space:nowrap}
+.plan-name{font-size:.85rem;color:var(--text2);margin-bottom:.25rem}
+.plan-price{font-size:2.2rem;font-weight:700;color:var(--text);line-height:1}
+.plan-price span{font-size:.9rem;font-weight:400;color:var(--text2)}
+.plan-note{font-size:.78rem;color:var(--text3);margin-bottom:1.25rem;margin-top:.25rem}
+.plan-features{list-style:none;margin-bottom:1.5rem}
+.plan-features li{display:flex;align-items:center;gap:.6rem;font-size:.88rem;color:var(--text2);padding:.35rem 0;border-bottom:0.5px solid var(--border)}
+.plan-features li:last-child{border:none}
+.plan-features li svg{width:14px;height:14px;flex-shrink:0}
+.plan-features li.no{opacity:.5}
+.plan-btn{display:block;width:100%;padding:.75rem;border-radius:9px;border:none;font-size:.95rem;font-weight:600;cursor:pointer;text-align:center;text-decoration:none;transition:all .15s}
+.plan-btn.gold{background:var(--gold);color:var(--black)}
+.plan-btn.gold:hover{background:var(--gold-l)}
+.plan-btn.outline{background:transparent;border:0.5px solid var(--border);color:var(--text2)}
+.plan-btn.outline:hover{border-color:var(--gold-d);color:var(--text)}
+
+/* FAQ */
+.faq{max-width:700px;margin:0 auto}
+.faq-item{border-bottom:0.5px solid var(--border);padding:1.25rem 0}
+.faq-q{font-size:.95rem;font-weight:600;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;user-select:none}
+.faq-q:hover{color:var(--gold)}
+.faq-chevron{font-size:.8rem;color:var(--text3);transition:transform .2s;flex-shrink:0}
+.faq-a{font-size:.88rem;color:var(--text2);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s}
+.faq-a.open{max-height:400px;padding-top:.75rem}
+
+/* SECURITY */
+.security-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+.sec-card{background:var(--card);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem;text-align:center}
+.sec-num{font-size:1.6rem;font-weight:700;color:var(--gold);margin-bottom:.25rem}
+.sec-label{font-size:.82rem;color:var(--text2)}
+
+/* CTA BANNER */
+.cta-banner{background:var(--green-d);border:0.5px solid var(--gold-b);border-radius:20px;padding:3rem 2rem;text-align:center;max-width:700px;margin:0 auto}
+.cta-banner h2{color:var(--gold-l);margin-bottom:.75rem}
+.cta-banner p{color:var(--text2);margin-bottom:2rem}
+
+/* FOOTER */
+footer{border-top:0.5px solid var(--border);padding:2rem 1.5rem;text-align:center}
+footer p{font-size:.8rem;color:var(--text3)}
+footer a{color:var(--text3);text-decoration:none}
+footer a:hover{color:var(--gold)}
+.footer-links{display:flex;gap:1.5rem;justify-content:center;margin-bottom:.75rem;flex-wrap:wrap}
+
+/* DIVIDER */
+.divider{border:none;border-top:0.5px solid var(--border);margin:0}
+
+@media(max-width:600px){
+  .nav-links{display:none}
+  .hero{padding:6rem 1rem 3rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M12 2L20 6V12C20 17 16 21 12 23C8 21 4 17 4 12V6Z" fill="#1A3516" stroke="#C9A84C" stroke-width="1.5"/>
+        <rect x="8" y="13" width="8" height="6" rx="1.5" fill="#C9A84C" fill-opacity=".15" stroke="#C9A84C" stroke-width="1.2"/>
+        <path d="M9.5 13V10.5A2.5 2.5 0 0 1 14.5 10.5V13" stroke="#C9A84C" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="12" cy="16" r="1" fill="#C9A84C"/>
+      </svg>
+    </div>
+    <span class="nav-logo-text">Dead Man's Vault</span>
+  </a>
+  <div class="nav-links">
+    <a href="#how-it-works">How it works</a>
+    <a href="#use-cases">Who it's for</a>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="privacy-policy/" >Privacy</a>
+    <a class="nav-cta" href="#download">Get the app</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div style="position:relative;z-index:1;width:100%">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      AES-256 encrypted · data never leaves your device
+    </div>
+    <h1>Your secrets, safe.<br><span>Shared if you can't.</span></h1>
+    <p class="hero-sub">Dead Man's Vault keeps your most sensitive information encrypted on your device — and automatically delivers it to a trusted contact if you fail to check in.</p>
+    <div class="hero-btns">
+      <a class="btn-primary" href="#download">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" fill="currentColor"/></svg>
+        Download for Android
+      </a>
+      <a class="btn-ghost" href="#how-it-works">See how it works</a>
+    </div>
+    <p class="hero-note">Free to start · No account required · No data collected</p>
+
+    <!-- Mini phone mockup -->
+    <div class="phone-wrap" style="margin-top:3rem">
+      <div class="phone-frame">
+        <div class="phone-bar"><div class="phone-notch"></div></div>
+        <div class="phone-screen">
+          <div class="ps-status">
+            <div class="ps-dot"></div>
+            <span class="ps-text">Vault active</span>
+            <span class="ps-badge">PRO</span>
+          </div>
+          <div class="ps-ring">
+            <svg width="100" height="100" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="42" fill="none" stroke="#2A3028" stroke-width="7"/>
+              <circle cx="50" cy="50" r="42" fill="none" stroke="#C9A84C" stroke-width="7" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="66" transform="rotate(-90 50 50)"/>
+              <text x="50" y="46" text-anchor="middle" font-size="14" fill="#E8C97A" font-weight="600" font-family="system-ui">18h 22m</text>
+              <text x="50" y="59" text-anchor="middle" font-size="7.5" fill="#5A5848" font-family="system-ui">next check-in</text>
+            </svg>
+          </div>
+          <button class="ps-btn">Check in now</button>
+          <button class="ps-ghost">My secrets (12)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- SECURITY STATS -->
+<section style="padding:3rem 1.5rem">
+  <div class="security-grid">
+    <div class="sec-card">
+      <div class="sec-num">AES-256</div>
+      <div class="sec-label">Military-grade encryption</div>
+    </div>
+    <div class="sec-card">
+      <div class="sec-num">0</div>
+      <div class="sec-label">Data collected on our servers</div>
+    </div>
+    <div class="sec-card">
+      <div class="sec-num">HSM</div>
+      <div class="sec-label">Keys stored in Android hardware</div>
+    </div>
+    <div class="sec-card">
+      <div class="sec-num">8</div>
+      <div class="sec-label">Recovery codes generated at setup</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="section-label">How it works</div>
+  <h2>Simple setup. Automatic protection.</h2>
+  <p class="section-sub">Three steps to make sure your most important information reaches the right person — even if you can't.</p>
+  <div class="steps">
+    <div class="step-card" data-n="01">
+      <div class="step-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 11V7A7 7 0 0 1 19 7V11" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/><rect x="3" y="11" width="18" height="12" rx="3" fill="#1A3516" stroke="#C9A84C" stroke-width="1.5"/><circle cx="12" cy="17" r="2" fill="#C9A84C"/></svg>
+      </div>
+      <div class="step-title">Create your vault</div>
+      <div class="step-desc">Set a PIN and fingerprint lock. Add your secrets — passwords, documents, personal messages, access codes. Everything is encrypted immediately with AES-256-GCM.</div>
+    </div>
+    <div class="step-card" data-n="02">
+      <div class="step-icon">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#C9A84C" stroke-width="1.5"/><polyline points="12,6 12,12 16,14" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="step-title">Set your check-in</div>
+      <div class="step-desc">Choose how often you want to check in — from 1 hour to 30 days. Add an emergency contact who will receive your secrets if you miss your deadline.</div>
+    </div>
+    <div class="step-card" data-n="03">
+      <div class="step-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.6 1.26h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" stroke="#C9A84C" stroke-width="1.5"/></svg>
+      </div>
+      <div class="step-title">Automatic delivery</div>
+      <div class="step-desc">If you miss a check-in, your vault sends your secrets to your emergency contact via Gmail. No servers involved — it happens entirely from your device.</div>
+    </div>
+    <div class="step-card" data-n="04">
+      <div class="step-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#1A3516"/><path d="M9 12l2 2 4-4" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="step-title">Stay in control</div>
+      <div class="step-desc">As long as you check in regularly, your secrets stay private. Change your PIN, add contacts, update secrets, or adjust your interval any time from Settings.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- USE CASES -->
+<section id="use-cases">
+  <div class="section-label">Who it's for</div>
+  <h2>Built for real situations.</h2>
+  <p class="section-sub">Dead Man's Vault is for anyone who wants to make sure the right people have access to critical information when it matters most.</p>
+  <div class="use-cases">
+    <div class="use-card featured">
+      <div class="use-tag">Most common</div>
+      <div class="use-title">Digital estate planning</div>
+      <div class="use-desc">Store passwords, account access, crypto keys, and instructions for your family. If something happens to you, they receive everything they need — automatically.</div>
+    </div>
+    <div class="use-card">
+      <div class="use-tag">Journalists & activists</div>
+      <div class="use-title">Dead man's switch for sensitive work</div>
+      <div class="use-desc">If you go silent for a defined period, your sources, documents, or evidence are automatically forwarded to a trusted colleague or lawyer.</div>
+    </div>
+    <div class="use-card">
+      <div class="use-tag">Solo travellers</div>
+      <div class="use-title">Emergency contact protocol</div>
+      <div class="use-desc">Travelling alone? Set a daily check-in. If you miss it, your emergency contact receives your location details, passport info, and travel documents.</div>
+    </div>
+    <div class="use-card">
+      <div class="use-tag">Business owners</div>
+      <div class="use-title">Business continuity</div>
+      <div class="use-desc">Store server credentials, banking details, and critical passwords. Ensure your business can keep running if you're suddenly unavailable.</div>
+    </div>
+    <div class="use-card">
+      <div class="use-tag">Caregivers</div>
+      <div class="use-title">Medical & care information</div>
+      <div class="use-desc">Keep medication lists, doctor contacts, insurance details, and care instructions. Your family receives them immediately when needed.</div>
+    </div>
+    <div class="use-card">
+      <div class="use-tag">Everyone</div>
+      <div class="use-title">Secure personal vault</div>
+      <div class="use-desc">Even without the dead man's switch, it's a fully encrypted, biometric-protected vault for your most sensitive personal information.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-label">Features</div>
+  <h2>Everything you need. Nothing you don't.</h2>
+  <p class="section-sub">Built with privacy-first architecture. Your data stays on your device.</p>
+  <div class="features-grid">
+    <div class="feat-card">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 11V7A7 7 0 0 1 19 7V11" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/><rect x="3" y="11" width="18" height="12" rx="3" fill="#1A3516" stroke="#C9A84C" stroke-width="1.5"/><circle cx="12" cy="17" r="2" fill="#C9A84C"/></svg></div>
+      <div><div class="feat-title">AES-256-GCM encryption</div><div class="feat-desc">Military-grade encryption using the Android Hardware Security Module. Keys never leave your device.</div></div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="11" r="2" fill="#C9A84C"/><path d="M9 7A5 5 0 0 1 17 11" stroke="#C9A84C" stroke-width="1.4" stroke-linecap="round"/><path d="M7 10.5A5 5 0 0 0 12 16" stroke="#C9A84C" stroke-width="1.4" stroke-linecap="round"/><path d="M7 6A7 7 0 0 1 19 12" stroke="#C9A84C" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+      <div><div class="feat-title">Fingerprint & PIN unlock</div><div class="feat-desc">Biometric authentication via Android BiometricPrompt. PIN fallback with 4–6 digit support.</div></div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#C9A84C" stroke-width="1.5"/><polyline points="12,6 12,12 16,14" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div><div class="feat-title">Configurable check-in timer</div><div class="feat-desc">Set intervals from 1 hour to 30 days. Visual countdown ring on the dashboard. Push notifications before deadline.</div></div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M6 19A5 5 0 0 1 6 9A6 6 0 0 1 18 11A4 4 0 0 1 18 19Z" stroke="#C9A84C" stroke-width="1.5"/><path d="M12 22V15M9.5 17.5L12 15L14.5 17.5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div><div class="feat-title">Encrypted Google Drive backup</div><div class="feat-desc">Pro feature. Backup your vault to your private Drive folder. Restore on a new device — no data passes through our servers.</div></div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="12" rx="3" fill="#1A3516" stroke="#C9A84C" stroke-width="1.5"/><path d="M7 7A5 5 0 0 1 17 7" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/><path d="M7 11h10" stroke="#C9A84C" stroke-width="1" stroke-dasharray="2 2"/></svg></div>
+      <div><div class="feat-title">Recovery codes</div><div class="feat-desc">8 one-time recovery codes generated at setup. Use one to reset your PIN without losing your secrets.</div></div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3" stroke="#C9A84C" stroke-width="1.5"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/><circle cx="19" cy="8" r="2.5" stroke="#C9A84C" stroke-width="1.3"/><path d="M22 18c0-2.5-1.3-4.5-3-5.5" stroke="#C9A84C" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+      <div><div class="feat-title">Multiple emergency contacts</div><div class="feat-desc">Pro feature. Add multiple trusted people. Each receives your secrets when the dead man's switch triggers.</div></div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="#C9A84C" stroke-width="1.5"/><path d="M8 21h8M12 17v4" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div><div class="feat-title">Home screen widget</div><div class="feat-desc">Countdown timer widget on your home screen. Tap to check in instantly without opening the app.</div></div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="#C9A84C" stroke-width="1.5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div><div class="feat-title">Light, dark & auto theme</div><div class="feat-desc">Three theme options. Auto follows your system setting. Designed for comfortable use in any lighting condition.</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PRICING -->
+<section id="pricing" style="text-align:center">
+  <div class="section-label">Pricing</div>
+  <h2>Start free. Upgrade when you're ready.</h2>
+  <p class="section-sub" style="margin:0 auto 3rem">No credit card required to get started.</p>
+  <div class="pricing-grid">
+    <div class="plan">
+      <div class="plan-name">Free</div>
+      <div class="plan-price">€0</div>
+      <div class="plan-note">forever</div>
+      <ul class="plan-features">
+        <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>Up to 3 secrets</li>
+        <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>1 emergency contact</li>
+        <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>Check-in from 24 hours</li>
+        <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>PIN + fingerprint lock</li>
+        <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>Recovery codes</li>
+        <li class="no"><svg viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3l-8 8" stroke="#5A5848" stroke-width="1.5" stroke-linecap="round"/></svg>Google Drive backup</li>
+        <li class="no"><svg viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3l-8 8" stroke="#5A5848" stroke-width="1.5" stroke-linecap="round"/></svg>Multiple contacts</li>
+      </ul>
+      <a href="#download" class="plan-btn outline">Download free</a>
+    </div>
+    <div class="plan featured">
+      <div class="plan-popular">Most popular</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-price">€2.99<span>/month</span></div>
+      <div class="plan-note">or €24.99/year · 14-day free trial</div>
+      <ul class="plan-features">
+        <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Unlimited secrets</li>
+        <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Multiple emergency contacts</li>
+        <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Check-in from 1 hour</li>
+        <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>PIN + fingerprint lock</li>
+        <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Recovery codes</li>
+        <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Encrypted Drive backup</li>
+        <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>No ads</li>
+      </ul>
+      <a href="#download" class="plan-btn gold">Start free trial</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-label">FAQ</div>
+  <h2>Common questions</h2>
+  <div class="faq">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What happens if I forget to check in? <span class="faq-chevron">▼</span></div>
+      <div class="faq-a">The app sends an email with your decrypted secrets to your emergency contact(s) via your own Gmail account. You receive push notification reminders before the deadline — when 50% of your interval has passed, and again at 80%. The email is only sent if you miss the final deadline completely.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Can Dead Man's Vault see my secrets? <span class="faq-chevron">▼</span></div>
+      <div class="faq-a">No. Your secrets are encrypted with AES-256-GCM using a key that is stored in the Android Hardware Security Module — a physical chip on your device. The key never leaves your device. We have no servers, no accounts, and no way to access your data.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What if I lose my phone? <span class="faq-chevron">▼</span></div>
+      <div class="faq-a">Pro subscribers can restore their vault on a new device using the encrypted backup from Google Drive. The backup is protected by your PIN — even if someone gains access to your Drive, they cannot read the backup without it. Free users can still recover their PIN using recovery codes if needed.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What if I forget my PIN? <span class="faq-chevron">▼</span></div>
+      <div class="faq-a">You have three recovery options: (1) use your fingerprint to confirm your identity and set a new PIN, (2) use one of the 8 recovery codes generated when you set up your vault, or (3) if you're a Pro subscriber, re-authenticate with Google and restore from your Drive backup.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Does the app require an internet connection? <span class="faq-chevron">▼</span></div>
+      <div class="faq-a">No. The core vault functionality — storing, viewing, and managing secrets, checking in, and PIN authentication — works entirely offline. Internet is only required for the Gmail send when the dead man's switch triggers, and for Google Drive backup/restore on Pro.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">How is this different from a password manager? <span class="faq-chevron">▼</span></div>
+      <div class="faq-a">Password managers are designed to help you access your passwords conveniently. Dead Man's Vault is designed to ensure someone else can access your information if something happens to you. It's not a replacement for a password manager — it's a complement to it, focused on emergency access and digital estate planning.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Can I cancel my Pro subscription? <span class="faq-chevron">▼</span></div>
+      <div class="faq-a">Yes, at any time through your Google Play account. Your Pro features remain active until the end of the billing period. After cancellation, your vault reverts to free tier limits — your existing secrets are not deleted, but you won't be able to add new ones beyond the free limit.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CTA -->
+<section id="download" style="padding:5rem 1.5rem">
+  <div class="cta-banner">
+    <h2>Your secrets deserve a plan.</h2>
+    <p>Free to start. No account required. Your data never leaves your device.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a class="btn-primary" href="#">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" fill="currentColor"/></svg>
+        Download on Google Play
+      </a>
+      <a class="btn-ghost" href="privacy-policy/" style="border-color:rgba(201,168,76,.3);color:var(--gold-l)">Read privacy policy</a>
+    </div>
+    <p style="margin-top:1.25rem;font-size:.8rem;color:var(--text3)">Available for Android 8.0 and above · 14-day Pro trial included</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="#how-it-works">How it works</a>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="privacy-policy/">Privacy policy</a>
+    <a href="mailto:privacy@deadmansvault.app">Contact</a>
+  </div>
+  <p>&copy; 2025 Dead Man's Vault &nbsp;·&nbsp; <a href="mailto:privacy@deadmansvault.app">privacy@deadmansvault.app</a></p>
+</footer>
+
+<script>
+function toggleFaq(el) {
+  const a = el.nextElementSibling;
+  const c = el.querySelector('.faq-chevron');
+  const isOpen = a.classList.contains('open');
+  document.querySelectorAll('.faq-a').forEach(x => x.classList.remove('open'));
+  document.querySelectorAll('.faq-chevron').forEach(x => x.style.transform = '');
+  if (!isOpen) { a.classList.add('open'); c.style.transform = 'rotate(180deg)'; }
+}
+</script>
+</body>
+</html>
