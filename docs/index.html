@@ -517,12 +517,31 @@ footer p{font-size:.77rem;color:var(--text3)}
 
 <script>
 const langs = ['en','pt','br','de','fr'];
+
+const navT = {
+  en: { how:'How it works', who:"Who it's for", feat:'Features', price:'Pricing', faq:'FAQ', priv:'Privacy', cta:'Get the app' },
+  pt: { how:'Como funciona', who:'Para quem', feat:'Funcionalidades', price:'Preços', faq:'FAQ', priv:'Privacidade', cta:'Obter a app' },
+  br: { how:'Como funciona', who:'Para quem', feat:'Funcionalidades', price:'Preços', faq:'FAQ', priv:'Privacidade', cta:'Baixar o app' },
+  de: { how:'So funktioniert es', who:'Für wen', feat:'Funktionen', price:'Preise', faq:'FAQ', priv:'Datenschutz', cta:'App herunterladen' },
+  fr: { how:'Comment ça marche', who:'Pour qui', feat:'Fonctionnalités', price:'Tarifs', faq:'FAQ', priv:'Confidentialité', cta:"Obtenir l'app" }
+};
+
 function setLang(l, btn) {
   langs.forEach(x => {
     document.getElementById('s-'+x).classList.toggle('active', x === l);
   });
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
+
+  const t = navT[l];
+  document.getElementById('nav-how').textContent   = t.how;
+  document.getElementById('nav-who').textContent   = t.who;
+  document.getElementById('nav-feat').textContent  = t.feat;
+  document.getElementById('nav-price').textContent = t.price;
+  document.getElementById('nav-faq').textContent   = t.faq;
+  document.getElementById('nav-priv').textContent  = t.priv;
+  document.getElementById('nav-cta').textContent   = t.cta;
+
   window.scrollTo({top:0, behavior:'smooth'});
 }
 function tFaq(el) {
