@@ -3,490 +3,535 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Dead Man's Vault — Encrypted secret keeper with dead man's switch. Your secrets, protected. Automatically shared if something happens to you.">
-<meta property="og:title" content="Dead Man's Vault">
-<meta property="og:description" content="Encrypted secrets with a dead man's switch. Your data never leaves your device.">
-<meta property="og:type" content="website">
+<meta name="description" content="Dead Man's Vault — Encrypted secret keeper with dead man's switch. Your secrets, protected.">
 <title>Dead Man's Vault — Your secrets, protected</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
   --gold:#C9A84C;--gold-l:#E8C97A;--gold-d:#8B6F2E;--gold-b:#3A3020;
-  --green:#2D5A27;--green-d:#1A3516;--green-l:#3D7A35;
+  --green:#2D5A27;--green-d:#1A3516;
   --black:#0A0C0A;--card:#111410;--card2:#181C17;
   --border:#2A3028;--text:#F0EDD8;--text2:#9A9880;--text3:#5A5848;
-  --danger:#C0392B;--success:#27AE60;--warn:#E8A020;
+  --success:#27AE60;
 }
 html{scroll-behavior:smooth}
 body{font-family:system-ui,-apple-system,sans-serif;background:var(--black);color:var(--text);line-height:1.7;overflow-x:hidden}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,12,10,.92);backdrop-filter:blur(12px);border-bottom:0.5px solid var(--border);padding:.9rem 2rem;display:flex;align-items:center;gap:1rem}
-.nav-logo{display:flex;align-items:center;gap:.6rem;text-decoration:none}
-.nav-logo-icon{width:32px;height:32px;border-radius:8px;background:var(--green-d);border:1px solid var(--gold-b);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.nav-logo-icon svg{width:18px;height:18px}
-.nav-logo-text{font-size:.95rem;font-weight:600;color:var(--gold-l)}
-.nav-links{display:flex;gap:1.5rem;margin-left:auto;align-items:center}
-.nav-links a{font-size:.85rem;color:var(--text2);text-decoration:none;transition:color .15s}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,12,10,.93);backdrop-filter:blur(12px);border-bottom:0.5px solid var(--border);padding:.8rem 1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.nav-logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;flex-shrink:0}
+.nav-logo-icon{width:30px;height:30px;border-radius:7px;background:var(--green-d);border:1px solid var(--gold-b);display:flex;align-items:center;justify-content:center}
+.nav-logo-icon svg{width:17px;height:17px}
+.nav-logo-text{font-size:.9rem;font-weight:600;color:var(--gold-l)}
+.nav-links{display:flex;gap:1.2rem;margin-left:auto;align-items:center;flex-wrap:wrap}
+.nav-links a{font-size:.82rem;color:var(--text2);text-decoration:none;transition:color .15s}
 .nav-links a:hover{color:var(--gold)}
-.nav-cta{background:var(--gold);color:var(--black);padding:.45rem 1.1rem;border-radius:7px;font-size:.85rem;font-weight:600;text-decoration:none;transition:background .15s}
-.nav-cta:hover{background:var(--gold-l);color:var(--black)}
+.nav-cta{background:var(--gold);color:var(--black)!important;padding:.4rem 1rem;border-radius:7px;font-weight:600}
+.nav-cta:hover{background:var(--gold-l)!important}
 
-/* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:7rem 1.5rem 5rem;position:relative;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 40%, rgba(45,90,39,.18) 0%, transparent 70%);pointer-events:none}
-.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--green-d);border:0.5px solid var(--gold-b);border-radius:20px;padding:.35rem 1rem;font-size:.78rem;color:var(--gold);margin-bottom:1.5rem}
-.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+.lang-bar{position:fixed;top:52px;left:0;right:0;z-index:99;background:rgba(10,12,10,.93);backdrop-filter:blur(8px);border-bottom:0.5px solid var(--border);padding:.45rem 1.5rem;display:flex;gap:.4rem;flex-wrap:wrap}
+.lang-btn{background:transparent;border:0.5px solid var(--border);border-radius:5px;padding:.25rem .7rem;font-size:.75rem;color:var(--text2);cursor:pointer;transition:all .15s}
+.lang-btn.active,.lang-btn:hover{border-color:var(--gold-b);color:var(--gold);background:var(--green-d)}
+
+.lang-section{display:none}
+.lang-section.active{display:block}
+
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:8.5rem 1.5rem 5rem;position:relative}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 40%,rgba(45,90,39,.15) 0%,transparent 70%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--green-d);border:0.5px solid var(--gold-b);border-radius:20px;padding:.3rem .9rem;font-size:.75rem;color:var(--gold);margin-bottom:1.4rem}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-h1{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:700;line-height:1.15;color:var(--text);margin-bottom:1rem;letter-spacing:-.02em}
+h1{font-size:clamp(2rem,5vw,3.6rem);font-weight:700;line-height:1.15;color:var(--text);margin-bottom:1rem;letter-spacing:-.02em}
 h1 span{color:var(--gold)}
-.hero-sub{font-size:clamp(1rem,2vw,1.2rem);color:var(--text2);max-width:560px;margin:0 auto 2.5rem;line-height:1.6}
-.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem}
-.btn-primary{background:var(--gold);color:var(--black);padding:.8rem 2rem;border-radius:10px;font-size:1rem;font-weight:600;text-decoration:none;transition:all .15s;display:inline-flex;align-items:center;gap:.5rem}
-.btn-primary:hover{background:var(--gold-l);transform:translateY(-1px)}
-.btn-ghost{background:transparent;color:var(--text2);padding:.8rem 2rem;border-radius:10px;font-size:1rem;border:0.5px solid var(--border);text-decoration:none;transition:all .15s;display:inline-flex;align-items:center;gap:.5rem}
-.btn-ghost:hover{border-color:var(--gold-d);color:var(--text)}
-.hero-note{font-size:.8rem;color:var(--text3)}
+.hero-sub{font-size:clamp(.95rem,2vw,1.15rem);color:var(--text2);max-width:540px;margin:0 auto 2.2rem;line-height:1.6}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem}
+.btn-p{background:var(--gold);color:var(--black);padding:.75rem 1.8rem;border-radius:9px;font-size:.95rem;font-weight:600;text-decoration:none;transition:all .15s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-p:hover{background:var(--gold-l);transform:translateY(-1px)}
+.btn-g{background:transparent;color:var(--text2);padding:.75rem 1.8rem;border-radius:9px;font-size:.95rem;border:0.5px solid var(--border);text-decoration:none;transition:all .15s}
+.btn-g:hover{border-color:var(--gold-d);color:var(--text)}
+.hero-note{font-size:.78rem;color:var(--text3);margin-bottom:2.5rem}
 
-/* PHONE MOCKUP */
-.phone-wrap{display:flex;justify-content:center;margin-bottom:5rem}
-.phone-frame{width:220px;background:var(--black);border:1.5px solid var(--border);border-radius:30px;overflow:hidden;box-shadow:0 0 60px rgba(201,168,76,.08)}
-.phone-bar{height:26px;background:var(--black);display:flex;align-items:center;justify-content:center}
-.phone-notch{width:56px;height:14px;background:#000;border-radius:0 0 9px 9px}
-.phone-screen{padding:14px;background:var(--black)}
-.ps-status{display:flex;align-items:center;gap:5px;margin-bottom:10px}
+.phone-wrap{display:flex;justify-content:center}
+.phone-frame{width:200px;background:var(--black);border:1.5px solid var(--border);border-radius:28px;overflow:hidden;box-shadow:0 0 50px rgba(201,168,76,.07)}
+.pbar{height:24px;background:var(--black);display:flex;align-items:center;justify-content:center}
+.pnotch{width:52px;height:13px;background:#000;border-radius:0 0 8px 8px}
+.pscreen{padding:13px;background:var(--black)}
+.ps-status{display:flex;align-items:center;gap:5px;margin-bottom:9px}
 .ps-dot{width:7px;height:7px;border-radius:50%;background:var(--success)}
 .ps-text{font-size:9px;color:var(--text2);flex:1}
-.ps-badge{background:var(--green-d);border:0.5px solid var(--gold-b);border-radius:3px;padding:1px 5px;font-size:7px;color:var(--gold-l)}
-.ps-ring{display:flex;justify-content:center;margin:8px 0}
-.ps-btn{width:100%;padding:8px;border-radius:7px;border:none;background:var(--gold);color:var(--black);font-size:11px;font-weight:600;cursor:pointer;margin-bottom:6px}
-.ps-ghost{width:100%;padding:7px;border-radius:7px;border:0.5px solid var(--border);background:transparent;color:var(--text2);font-size:10px;cursor:pointer}
+.ps-pro{background:var(--green-d);border:0.5px solid var(--gold-b);border-radius:3px;padding:1px 5px;font-size:7px;color:var(--gold-l)}
+.ps-btn{width:100%;padding:8px;border-radius:7px;border:none;background:var(--gold);color:var(--black);font-size:11px;font-weight:600;cursor:pointer;margin-bottom:5px}
+.ps-ghost{width:100%;padding:6px;border-radius:7px;border:0.5px solid var(--border);background:transparent;color:var(--text2);font-size:10px;cursor:pointer}
 
-/* SECTIONS */
-section{padding:5rem 1.5rem;max-width:1100px;margin:0 auto}
-.section-label{font-size:.75rem;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.75rem}
-h2{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;color:var(--text);margin-bottom:1rem;line-height:1.2}
-.section-sub{font-size:1rem;color:var(--text2);max-width:560px;margin-bottom:3rem;line-height:1.6}
+section{padding:4.5rem 1.5rem;max-width:1060px;margin:0 auto}
+.sec-label{font-size:.72rem;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.6rem}
+h2{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:700;color:var(--text);margin-bottom:.9rem;line-height:1.2}
+.sec-sub{font-size:.95rem;color:var(--text2);max-width:540px;margin-bottom:2.5rem;line-height:1.6}
+hr.div{border:none;border-top:0.5px solid var(--border);margin:0}
 
-/* HOW IT WORKS */
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
-.step-card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:1.5rem;position:relative}
-.step-card::before{content:attr(data-n);position:absolute;top:1.25rem;right:1.25rem;font-size:2rem;font-weight:700;color:var(--border);line-height:1}
-.step-icon{width:44px;height:44px;border-radius:10px;background:var(--green-d);border:0.5px solid var(--gold-b);display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
-.step-icon svg{width:22px;height:22px}
-.step-title{font-size:1rem;font-weight:600;color:var(--text);margin-bottom:.5rem}
-.step-desc{font-size:.88rem;color:var(--text2);line-height:1.6}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1.25rem}
+.step-card{background:var(--card);border:0.5px solid var(--border);border-radius:13px;padding:1.4rem;position:relative}
+.step-card::before{content:attr(data-n);position:absolute;top:1.1rem;right:1.1rem;font-size:1.8rem;font-weight:700;color:var(--border);line-height:1}
+.s-icon{width:40px;height:40px;border-radius:9px;background:var(--green-d);border:0.5px solid var(--gold-b);display:flex;align-items:center;justify-content:center;margin-bottom:.9rem}
+.s-icon svg{width:20px;height:20px}
+.s-title{font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:.4rem}
+.s-desc{font-size:.85rem;color:var(--text2);line-height:1.6}
 
-/* USE CASES */
-.use-cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem}
-.use-card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:1.5rem}
-.use-card.featured{border-color:var(--gold-b);background:var(--green-d)}
-.use-tag{display:inline-block;font-size:.72rem;padding:.2rem .6rem;border-radius:4px;background:var(--card2);color:var(--text3);margin-bottom:.75rem}
-.use-card.featured .use-tag{background:rgba(201,168,76,.15);color:var(--gold)}
-.use-title{font-size:1rem;font-weight:600;color:var(--text);margin-bottom:.5rem}
-.use-desc{font-size:.875rem;color:var(--text2);line-height:1.6}
+.use-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.1rem}
+.use-card{background:var(--card);border:0.5px solid var(--border);border-radius:13px;padding:1.4rem}
+.use-card.hot{border-color:var(--gold-b);background:var(--green-d)}
+.use-tag{display:inline-block;font-size:.7rem;padding:.18rem .55rem;border-radius:4px;background:var(--card2);color:var(--text3);margin-bottom:.7rem}
+.use-card.hot .use-tag{background:rgba(201,168,76,.15);color:var(--gold)}
+.use-title{font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:.4rem}
+.use-desc{font-size:.84rem;color:var(--text2);line-height:1.6}
 
-/* FEATURES */
-.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem}
-.feat-card{background:var(--card);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem;display:flex;gap:.9rem}
-.feat-icon{width:36px;height:36px;border-radius:8px;background:var(--green-d);border:0.5px solid var(--gold-b);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.feat-icon svg{width:18px;height:18px}
-.feat-title{font-size:.92rem;font-weight:600;color:var(--text);margin-bottom:.2rem}
-.feat-desc{font-size:.82rem;color:var(--text2);line-height:1.5}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.1rem}
+.feat-card{background:var(--card);border:0.5px solid var(--border);border-radius:11px;padding:1.15rem;display:flex;gap:.85rem}
+.f-icon{width:34px;height:34px;border-radius:7px;background:var(--green-d);border:0.5px solid var(--gold-b);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.f-icon svg{width:17px;height:17px}
+.f-title{font-size:.88rem;font-weight:600;color:var(--text);margin-bottom:.2rem}
+.f-desc{font-size:.8rem;color:var(--text2);line-height:1.5}
 
-/* PRICING */
-.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;max-width:640px;margin:0 auto}
-.plan{background:var(--card);border:0.5px solid var(--border);border-radius:16px;padding:1.75rem;position:relative}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.4rem;max-width:860px;margin:0 auto}
+.plan{background:var(--card);border:0.5px solid var(--border);border-radius:15px;padding:1.6rem;position:relative}
 .plan.featured{border:1.5px solid var(--gold-d)}
-.plan-popular{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--black);font-size:.72rem;font-weight:700;padding:.25rem .9rem;border-radius:20px;white-space:nowrap}
-.plan-name{font-size:.85rem;color:var(--text2);margin-bottom:.25rem}
-.plan-price{font-size:2.2rem;font-weight:700;color:var(--text);line-height:1}
-.plan-price span{font-size:.9rem;font-weight:400;color:var(--text2)}
-.plan-note{font-size:.78rem;color:var(--text3);margin-bottom:1.25rem;margin-top:.25rem}
-.plan-features{list-style:none;margin-bottom:1.5rem}
-.plan-features li{display:flex;align-items:center;gap:.6rem;font-size:.88rem;color:var(--text2);padding:.35rem 0;border-bottom:0.5px solid var(--border)}
+.plan.lifetime{border-color:var(--gold-b)}
+.plan-popular{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--black);font-size:.68rem;font-weight:700;padding:.22rem .85rem;border-radius:20px;white-space:nowrap}
+.plan-name{font-size:.82rem;color:var(--text2);margin-bottom:.2rem}
+.plan-price{font-size:2rem;font-weight:700;color:var(--text);line-height:1}
+.plan-price span{font-size:.85rem;font-weight:400;color:var(--text2)}
+.plan-note{font-size:.74rem;color:var(--text3);margin-bottom:1.15rem;margin-top:.2rem}
+.plan-features{list-style:none;margin-bottom:1.4rem}
+.plan-features li{display:flex;align-items:center;gap:.55rem;font-size:.85rem;color:var(--text2);padding:.3rem 0;border-bottom:0.5px solid var(--border)}
 .plan-features li:last-child{border:none}
-.plan-features li svg{width:14px;height:14px;flex-shrink:0}
-.plan-features li.no{opacity:.5}
-.plan-btn{display:block;width:100%;padding:.75rem;border-radius:9px;border:none;font-size:.95rem;font-weight:600;cursor:pointer;text-align:center;text-decoration:none;transition:all .15s}
+.plan-features li svg{width:13px;height:13px;flex-shrink:0}
+.plan-features li.no{opacity:.45}
+.plan-btn{display:block;width:100%;padding:.7rem;border-radius:8px;border:none;font-size:.9rem;font-weight:600;cursor:pointer;text-align:center;text-decoration:none;transition:all .15s}
 .plan-btn.gold{background:var(--gold);color:var(--black)}
 .plan-btn.gold:hover{background:var(--gold-l)}
 .plan-btn.outline{background:transparent;border:0.5px solid var(--border);color:var(--text2)}
 .plan-btn.outline:hover{border-color:var(--gold-d);color:var(--text)}
+.breakeven{width:100%;background:var(--card2);border:0.5px solid var(--border);border-radius:7px;padding:.55rem .75rem;text-align:left;margin-top:.5rem}
+.be-label{font-size:.68rem;color:var(--text3);margin-bottom:.15rem}
+.be-row{font-size:.78rem;color:var(--text2)}
 
-/* FAQ */
-.faq{max-width:700px;margin:0 auto}
-.faq-item{border-bottom:0.5px solid var(--border);padding:1.25rem 0}
-.faq-q{font-size:.95rem;font-weight:600;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;user-select:none}
+.faq{max-width:680px;margin:0 auto}
+.faq-item{border-bottom:0.5px solid var(--border);padding:1.1rem 0}
+.faq-q{font-size:.9rem;font-weight:600;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;user-select:none}
 .faq-q:hover{color:var(--gold)}
-.faq-chevron{font-size:.8rem;color:var(--text3);transition:transform .2s;flex-shrink:0}
-.faq-a{font-size:.88rem;color:var(--text2);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s}
-.faq-a.open{max-height:400px;padding-top:.75rem}
+.faq-chev{font-size:.75rem;color:var(--text3);transition:transform .2s;flex-shrink:0}
+.faq-a{font-size:.85rem;color:var(--text2);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s}
+.faq-a.open{max-height:400px;padding-top:.7rem}
 
-/* SECURITY */
-.security-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
-.sec-card{background:var(--card);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem;text-align:center}
-.sec-num{font-size:1.6rem;font-weight:700;color:var(--gold);margin-bottom:.25rem}
-.sec-label{font-size:.82rem;color:var(--text2)}
+.sec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.9rem;max-width:900px;margin:0 auto}
+.sec-card{background:var(--card);border:0.5px solid var(--border);border-radius:11px;padding:1.1rem;text-align:center}
+.sec-num{font-size:1.5rem;font-weight:700;color:var(--gold);margin-bottom:.2rem}
+.sec-lbl{font-size:.78rem;color:var(--text2)}
 
-/* CTA BANNER */
-.cta-banner{background:var(--green-d);border:0.5px solid var(--gold-b);border-radius:20px;padding:3rem 2rem;text-align:center;max-width:700px;margin:0 auto}
-.cta-banner h2{color:var(--gold-l);margin-bottom:.75rem}
-.cta-banner p{color:var(--text2);margin-bottom:2rem}
+.cta-banner{background:var(--green-d);border:0.5px solid var(--gold-b);border-radius:18px;padding:2.75rem 2rem;text-align:center;max-width:660px;margin:0 auto}
+.cta-banner h2{color:var(--gold-l);margin-bottom:.7rem}
+.cta-banner p{color:var(--text2);margin-bottom:1.75rem}
+.cta-note{margin-top:1.1rem;font-size:.76rem;color:var(--text3)}
 
-/* FOOTER */
-footer{border-top:0.5px solid var(--border);padding:2rem 1.5rem;text-align:center}
-footer p{font-size:.8rem;color:var(--text3)}
-footer a{color:var(--text3);text-decoration:none}
-footer a:hover{color:var(--gold)}
-.footer-links{display:flex;gap:1.5rem;justify-content:center;margin-bottom:.75rem;flex-wrap:wrap}
-
-/* DIVIDER */
-.divider{border:none;border-top:0.5px solid var(--border);margin:0}
-
-@media(max-width:600px){
-  .nav-links{display:none}
-  .hero{padding:6rem 1rem 3rem}
-}
+footer{border-top:0.5px solid var(--border);padding:1.75rem 1.5rem;text-align:center}
+footer p{font-size:.77rem;color:var(--text3)}
+.foot-links{display:flex;gap:1.3rem;justify-content:center;margin-bottom:.6rem;flex-wrap:wrap}
+.foot-links a{font-size:.77rem;color:var(--text3);text-decoration:none}
+.foot-links a:hover{color:var(--gold)}
+@media(max-width:600px){.nav-links{display:none}}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a class="nav-logo" href="#">
     <div class="nav-logo-icon">
-      <svg viewBox="0 0 24 24" fill="none">
-        <path d="M12 2L20 6V12C20 17 16 21 12 23C8 21 4 17 4 12V6Z" fill="#1A3516" stroke="#C9A84C" stroke-width="1.5"/>
-        <rect x="8" y="13" width="8" height="6" rx="1.5" fill="#C9A84C" fill-opacity=".15" stroke="#C9A84C" stroke-width="1.2"/>
-        <path d="M9.5 13V10.5A2.5 2.5 0 0 1 14.5 10.5V13" stroke="#C9A84C" stroke-width="1.4" stroke-linecap="round"/>
-        <circle cx="12" cy="16" r="1" fill="#C9A84C"/>
-      </svg>
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L20 6V12C20 17 16 21 12 23C8 21 4 17 4 12V6Z" fill="#1A3516" stroke="#C9A84C" stroke-width="1.5"/><rect x="8" y="13" width="8" height="6" rx="1.5" fill="#C9A84C" fill-opacity=".15" stroke="#C9A84C" stroke-width="1.2"/><path d="M9.5 13V10.5A2.5 2.5 0 0 1 14.5 10.5V13" stroke="#C9A84C" stroke-width="1.4" stroke-linecap="round"/><circle cx="12" cy="16" r="1" fill="#C9A84C"/></svg>
     </div>
     <span class="nav-logo-text">Dead Man's Vault</span>
   </a>
   <div class="nav-links">
-    <a href="#how-it-works">How it works</a>
-    <a href="#use-cases">Who it's for</a>
-    <a href="#features">Features</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#faq">FAQ</a>
-    <a href="privacy-policy/" >Privacy</a>
-    <a class="nav-cta" href="#download">Get the app</a>
+    <a href="#how" id="nav-how">How it works</a>
+    <a href="#who" id="nav-who">Who it's for</a>
+    <a href="#feat" id="nav-feat">Features</a>
+    <a href="#price" id="nav-price">Pricing</a>
+    <a href="#faq" id="nav-faq">FAQ</a>
+    <a href="privacy-policy/" id="nav-priv">Privacy</a>
+    <a class="nav-cta" href="#download" id="nav-cta">Get the app</a>
   </div>
 </nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-bg"></div>
-  <div style="position:relative;z-index:1;width:100%">
-    <div class="hero-badge">
-      <span class="hero-badge-dot"></span>
-      AES-256 encrypted · data never leaves your device
-    </div>
-    <h1>Your secrets, safe.<br><span>Shared if you can't.</span></h1>
-    <p class="hero-sub">Dead Man's Vault keeps your most sensitive information encrypted on your device — and automatically delivers it to a trusted contact if you fail to check in.</p>
-    <div class="hero-btns">
-      <a class="btn-primary" href="#download">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" fill="currentColor"/></svg>
-        Download for Android
-      </a>
-      <a class="btn-ghost" href="#how-it-works">See how it works</a>
-    </div>
-    <p class="hero-note">Free to start · No account required · No data collected</p>
-
-    <!-- Mini phone mockup -->
-    <div class="phone-wrap" style="margin-top:3rem">
-      <div class="phone-frame">
-        <div class="phone-bar"><div class="phone-notch"></div></div>
-        <div class="phone-screen">
-          <div class="ps-status">
-            <div class="ps-dot"></div>
-            <span class="ps-text">Vault active</span>
-            <span class="ps-badge">PRO</span>
-          </div>
-          <div class="ps-ring">
-            <svg width="100" height="100" viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="42" fill="none" stroke="#2A3028" stroke-width="7"/>
-              <circle cx="50" cy="50" r="42" fill="none" stroke="#C9A84C" stroke-width="7" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="66" transform="rotate(-90 50 50)"/>
-              <text x="50" y="46" text-anchor="middle" font-size="14" fill="#E8C97A" font-weight="600" font-family="system-ui">18h 22m</text>
-              <text x="50" y="59" text-anchor="middle" font-size="7.5" fill="#5A5848" font-family="system-ui">next check-in</text>
-            </svg>
-          </div>
-          <button class="ps-btn">Check in now</button>
-          <button class="ps-ghost">My secrets (12)</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('en',this)">English</button>
+  <button class="lang-btn" onclick="setLang('pt',this)">Português (PT)</button>
+  <button class="lang-btn" onclick="setLang('br',this)">Português (BR)</button>
+  <button class="lang-btn" onclick="setLang('de',this)">Deutsch</button>
+  <button class="lang-btn" onclick="setLang('fr',this)">Français</button>
 </div>
 
-<hr class="divider">
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- ENGLISH -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="lang-section active" id="s-en">
 
-<!-- SECURITY STATS -->
-<section style="padding:3rem 1.5rem">
-  <div class="security-grid">
-    <div class="sec-card">
-      <div class="sec-num">AES-256</div>
-      <div class="sec-label">Military-grade encryption</div>
-    </div>
-    <div class="sec-card">
-      <div class="sec-num">0</div>
-      <div class="sec-label">Data collected on our servers</div>
-    </div>
-    <div class="sec-card">
-      <div class="sec-num">HSM</div>
-      <div class="sec-label">Keys stored in Android hardware</div>
-    </div>
-    <div class="sec-card">
-      <div class="sec-num">8</div>
-      <div class="sec-label">Recovery codes generated at setup</div>
-    </div>
-  </div>
-</section>
+<div class="hero"><div class="hero-bg"></div><div style="position:relative;z-index:1;width:100%">
+  <div class="hero-badge"><span class="badge-dot"></span>AES-256 encrypted · data never leaves your device</div>
+  <h1>Your secrets, safe.<br><span>Shared if you can't.</span></h1>
+  <p class="hero-sub">Dead Man's Vault keeps your most sensitive information encrypted on your device — and automatically delivers it to a trusted contact if you fail to check in.</p>
+  <div class="hero-btns"><a class="btn-p" href="#download">Download for Android</a><a class="btn-g" href="#how">See how it works</a></div>
+  <p class="hero-note">Free to start · 6-digit PIN · No data collected · SMS fallback included</p>
+  <div class="phone-wrap"><div class="phone-frame"><div class="pbar"><div class="pnotch"></div></div><div class="pscreen">
+    <div class="ps-status"><div class="ps-dot"></div><span class="ps-text">Vault active</span><span class="ps-pro">PRO</span></div>
+    <div style="display:flex;justify-content:center;margin:8px 0"><svg width="90" height="90" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="#2A3028" stroke-width="7"/><circle cx="50" cy="50" r="42" fill="none" stroke="#C9A84C" stroke-width="7" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="66" transform="rotate(-90 50 50)"/><text x="50" y="46" text-anchor="middle" font-size="13" fill="#E8C97A" font-weight="600" font-family="system-ui">18h 22m</text><text x="50" y="59" text-anchor="middle" font-size="7" fill="#5A5848" font-family="system-ui">next check-in</text></svg></div>
+    <button class="ps-btn">Check in now</button><button class="ps-ghost">My secrets (12)</button>
+  </div></div></div>
+</div></div>
 
-<hr class="divider">
+<hr class="div">
+<section style="padding:2.5rem 1.5rem"><div class="sec-grid">
+  <div class="sec-card"><div class="sec-num">AES-256</div><div class="sec-lbl">Military-grade encryption</div></div>
+  <div class="sec-card"><div class="sec-num">0</div><div class="sec-lbl">Data on our servers</div></div>
+  <div class="sec-card"><div class="sec-num">HSM</div><div class="sec-lbl">Keys in Android hardware</div></div>
+  <div class="sec-card"><div class="sec-num">6-digit</div><div class="sec-lbl">Mandatory PIN length</div></div>
+  <div class="sec-card"><div class="sec-num">SMS</div><div class="sec-lbl">Automatic fallback delivery</div></div>
+</div></section>
+<hr class="div">
 
-<!-- HOW IT WORKS -->
-<section id="how-it-works">
-  <div class="section-label">How it works</div>
-  <h2>Simple setup. Automatic protection.</h2>
-  <p class="section-sub">Three steps to make sure your most important information reaches the right person — even if you can't.</p>
-  <div class="steps">
-    <div class="step-card" data-n="01">
-      <div class="step-icon">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M5 11V7A7 7 0 0 1 19 7V11" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/><rect x="3" y="11" width="18" height="12" rx="3" fill="#1A3516" stroke="#C9A84C" stroke-width="1.5"/><circle cx="12" cy="17" r="2" fill="#C9A84C"/></svg>
-      </div>
-      <div class="step-title">Create your vault</div>
-      <div class="step-desc">Set a PIN and fingerprint lock. Add your secrets — passwords, documents, personal messages, access codes. Everything is encrypted immediately with AES-256-GCM.</div>
-    </div>
-    <div class="step-card" data-n="02">
-      <div class="step-icon">
-        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#C9A84C" stroke-width="1.5"/><polyline points="12,6 12,12 16,14" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="step-title">Set your check-in</div>
-      <div class="step-desc">Choose how often you want to check in — from 1 hour to 30 days. Add an emergency contact who will receive your secrets if you miss your deadline.</div>
-    </div>
-    <div class="step-card" data-n="03">
-      <div class="step-icon">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.6 1.26h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" stroke="#C9A84C" stroke-width="1.5"/></svg>
-      </div>
-      <div class="step-title">Automatic delivery</div>
-      <div class="step-desc">If you miss a check-in, your vault sends your secrets to your emergency contact via Gmail. No servers involved — it happens entirely from your device.</div>
-    </div>
-    <div class="step-card" data-n="04">
-      <div class="step-icon">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#1A3516"/><path d="M9 12l2 2 4-4" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="step-title">Stay in control</div>
-      <div class="step-desc">As long as you check in regularly, your secrets stay private. Change your PIN, add contacts, update secrets, or adjust your interval any time from Settings.</div>
-    </div>
-  </div>
-</section>
+<section id="how"><div class="sec-label">How it works</div><h2>Simple setup. Automatic protection.</h2><p class="sec-sub">Three steps to ensure your most important information reaches the right person — even if you can't.</p>
+<div class="steps">
+  <div class="step-card" data-n="01"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 11V7A7 7 0 0 1 19 7V11" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/><rect x="3" y="11" width="18" height="12" rx="3" fill="#1A3516" stroke="#C9A84C" stroke-width="1.5"/><circle cx="12" cy="17" r="2" fill="#C9A84C"/></svg></div><div class="s-title">Create your vault</div><div class="s-desc">Set a 6-digit PIN and fingerprint lock. Add your secrets — passwords, documents, messages, access codes. Everything is encrypted immediately with AES-256-GCM.</div></div>
+  <div class="step-card" data-n="02"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#C9A84C" stroke-width="1.5"/><polyline points="12,6 12,12 16,14" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="s-title">Set your check-in</div><div class="s-desc">Choose how often you want to check in — from 1 hour to 30 days. Add an emergency contact email and phone number.</div></div>
+  <div class="step-card" data-n="03"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.6 1.26h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" stroke="#C9A84C" stroke-width="1.5"/></svg></div><div class="s-title">Automatic delivery</div><div class="s-desc">If you miss a check-in, the app sends your secrets via Gmail. If there's no internet, SMS kicks in automatically as a fallback — no configuration needed.</div></div>
+  <div class="step-card" data-n="04"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#1A3516"/><path d="M9 12l2 2 4-4" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="s-title">Stay in control</div><div class="s-desc">As long as you check in regularly, your secrets stay private. Change your PIN, update contacts, or adjust your interval any time from Settings.</div></div>
+</div></section>
+<hr class="div">
 
-<hr class="divider">
+<section id="who"><div class="sec-label">Who it's for</div><h2>Built for real situations.</h2><p class="sec-sub">For anyone who wants to make sure the right people have access to critical information when it matters most.</p>
+<div class="use-grid">
+  <div class="use-card hot"><div class="use-tag">Most common</div><div class="use-title">Digital estate planning</div><div class="use-desc">Store passwords, account access, crypto keys, and instructions for your family. If something happens to you, they receive everything automatically.</div></div>
+  <div class="use-card"><div class="use-tag">Journalists & activists</div><div class="use-title">Dead man's switch for sensitive work</div><div class="use-desc">If you go silent, your sources, documents, or evidence are automatically forwarded to a trusted colleague or lawyer.</div></div>
+  <div class="use-card"><div class="use-tag">Solo travellers</div><div class="use-title">Emergency contact protocol</div><div class="use-desc">Set a daily check-in. If you miss it, your emergency contact receives your location, passport info, and travel documents.</div></div>
+  <div class="use-card"><div class="use-tag">Business owners</div><div class="use-title">Business continuity</div><div class="use-desc">Store server credentials, banking details, and critical passwords. Your business keeps running if you're suddenly unavailable.</div></div>
+  <div class="use-card"><div class="use-tag">Caregivers</div><div class="use-title">Medical & care information</div><div class="use-desc">Keep medication lists, doctor contacts, insurance details, and care instructions ready for your family when needed.</div></div>
+  <div class="use-card"><div class="use-tag">Everyone</div><div class="use-title">Secure personal vault</div><div class="use-desc">A fully encrypted, biometric-protected vault for your most sensitive personal information — with or without the dead man's switch.</div></div>
+</div></section>
+<hr class="div">
 
-<!-- USE CASES -->
-<section id="use-cases">
-  <div class="section-label">Who it's for</div>
-  <h2>Built for real situations.</h2>
-  <p class="section-sub">Dead Man's Vault is for anyone who wants to make sure the right people have access to critical information when it matters most.</p>
-  <div class="use-cases">
-    <div class="use-card featured">
-      <div class="use-tag">Most common</div>
-      <div class="use-title">Digital estate planning</div>
-      <div class="use-desc">Store passwords, account access, crypto keys, and instructions for your family. If something happens to you, they receive everything they need — automatically.</div>
-    </div>
-    <div class="use-card">
-      <div class="use-tag">Journalists & activists</div>
-      <div class="use-title">Dead man's switch for sensitive work</div>
-      <div class="use-desc">If you go silent for a defined period, your sources, documents, or evidence are automatically forwarded to a trusted colleague or lawyer.</div>
-    </div>
-    <div class="use-card">
-      <div class="use-tag">Solo travellers</div>
-      <div class="use-title">Emergency contact protocol</div>
-      <div class="use-desc">Travelling alone? Set a daily check-in. If you miss it, your emergency contact receives your location details, passport info, and travel documents.</div>
-    </div>
-    <div class="use-card">
-      <div class="use-tag">Business owners</div>
-      <div class="use-title">Business continuity</div>
-      <div class="use-desc">Store server credentials, banking details, and critical passwords. Ensure your business can keep running if you're suddenly unavailable.</div>
-    </div>
-    <div class="use-card">
-      <div class="use-tag">Caregivers</div>
-      <div class="use-title">Medical & care information</div>
-      <div class="use-desc">Keep medication lists, doctor contacts, insurance details, and care instructions. Your family receives them immediately when needed.</div>
-    </div>
-    <div class="use-card">
-      <div class="use-tag">Everyone</div>
-      <div class="use-title">Secure personal vault</div>
-      <div class="use-desc">Even without the dead man's switch, it's a fully encrypted, biometric-protected vault for your most sensitive personal information.</div>
-    </div>
-  </div>
-</section>
+<section id="feat"><div class="sec-label">Features</div><h2>Everything you need. Nothing you don't.</h2><p class="sec-sub">Built with privacy-first architecture. Your data stays on your device.</p>
+<div class="feat-grid">
+  <div class="feat-card"><div class="f-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 11V7A7 7 0 0 1 19 7V11" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/><rect x="3" y="11" width="18" height="12" rx="3" fill="#1A3516" stroke="#C9A84C" stroke-width="1.5"/><circle cx="12" cy="17" r="2" fill="#C9A84C"/></svg></div><div><div class="f-title">AES-256-GCM encryption</div><div class="f-desc">Military-grade encryption via Android Hardware Security Module. Keys never leave your device.</div></div></div>
+  <div class="feat-card"><div class="f-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="11" r="2" fill="#C9A84C"/><path d="M9 7A5 5 0 0 1 17 11" stroke="#C9A84C" stroke-width="1.4" stroke-linecap="round"/><path d="M7 6A7 7 0 0 1 19 12" stroke="#C9A84C" stroke-width="1.4" stroke-linecap="round"/></svg></div><div><div class="f-title">6-digit PIN + fingerprint</div><div class="f-desc">Mandatory 6-digit PIN with biometric authentication. Recovery codes as backup. No 4-digit shortcuts.</div></div></div>
+  <div class="feat-card"><div class="f-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12" stroke="#C9A84C" stroke-width="1.5"/><path d="M1.61 3.44A2 2 0 0 1 3.6 1.26h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96" stroke="#C9A84C" stroke-width="1.5"/></svg></div><div><div class="f-title">Email + SMS fallback</div><div class="f-desc">Gmail first, automatic SMS via Twilio if offline or failed. Pro: send both simultaneously for maximum reliability.</div></div></div>
+  <div class="feat-card"><div class="f-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#1A3516" stroke="#C9A84C" stroke-width="1.5"/><circle cx="12" cy="9" r="2.5" stroke="#C9A84C" stroke-width="1.5"/></svg></div><div><div class="f-title">GPS location on trigger (Pro)</div><div class="f-desc">Your last GPS position is sent as a Google Maps link when the switch triggers. Vital for travellers and field workers.</div></div></div>
+  <div class="feat-card"><div class="f-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M6 19A5 5 0 0 1 6 9A6 6 0 0 1 18 11A4 4 0 0 1 18 19Z" fill="#1A3516" stroke="#C9A84C" stroke-width="1.5"/><path d="M12 22V15M9.5 17.5L12 15L14.5 17.5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="f-title">Google Drive + OneDrive (Pro)</div><div class="f-desc">Choose your cloud. Encrypted backup to Google Drive or Microsoft OneDrive. Restore on a new device instantly.</div></div></div>
+  <div class="feat-card"><div class="f-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#C9A84C" stroke-width="1.5"/><polyline points="12,6 12,12 16,14" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="f-title">Configurable check-in timer</div><div class="f-desc">1 hour to 30 days. Visual countdown ring. Push notifications at 50% and 20% remaining.</div></div></div>
+  <div class="feat-card"><div class="f-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="#C9A84C" stroke-width="1.5"/><path d="M8 21h8M12 17v4" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="f-title">Home screen widget</div><div class="f-desc">Live countdown on your home screen. Tap to check in without opening the app.</div></div></div>
+  <div class="feat-card"><div class="f-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="#C9A84C" stroke-width="1.5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="f-title">Light, dark & auto theme</div><div class="f-desc">Three theme options. Auto follows your system. Comfortable in any lighting condition.</div></div></div>
+</div></section>
+<hr class="div">
 
-<hr class="divider">
+<section id="price" style="text-align:center"><div class="sec-label">Pricing</div><h2>Start free. Upgrade when ready.</h2><p class="sec-sub" style="margin:0 auto 2.5rem">No credit card required to start.</p>
+<div class="pricing-grid">
+  <div class="plan"><div class="plan-name">Free</div><div class="plan-price">€0</div><div class="plan-note">forever</div><ul class="plan-features">
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>Up to 3 secrets</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>1 emergency contact</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>Check-in from 24h</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>6-digit PIN + fingerprint</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>8 recovery codes</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>Email + SMS fallback</li>
+    <li class="no"><svg viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3l-8 8" stroke="#5A5848" stroke-width="1.5" stroke-linecap="round"/></svg>Cloud backup</li>
+    <li class="no"><svg viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3l-8 8" stroke="#5A5848" stroke-width="1.5" stroke-linecap="round"/></svg>GPS location</li>
+  </ul><a href="#download" class="plan-btn outline">Download free</a></div>
 
-<!-- FEATURES -->
-<section id="features">
-  <div class="section-label">Features</div>
-  <h2>Everything you need. Nothing you don't.</h2>
-  <p class="section-sub">Built with privacy-first architecture. Your data stays on your device.</p>
-  <div class="features-grid">
-    <div class="feat-card">
-      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 11V7A7 7 0 0 1 19 7V11" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/><rect x="3" y="11" width="18" height="12" rx="3" fill="#1A3516" stroke="#C9A84C" stroke-width="1.5"/><circle cx="12" cy="17" r="2" fill="#C9A84C"/></svg></div>
-      <div><div class="feat-title">AES-256-GCM encryption</div><div class="feat-desc">Military-grade encryption using the Android Hardware Security Module. Keys never leave your device.</div></div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="11" r="2" fill="#C9A84C"/><path d="M9 7A5 5 0 0 1 17 11" stroke="#C9A84C" stroke-width="1.4" stroke-linecap="round"/><path d="M7 10.5A5 5 0 0 0 12 16" stroke="#C9A84C" stroke-width="1.4" stroke-linecap="round"/><path d="M7 6A7 7 0 0 1 19 12" stroke="#C9A84C" stroke-width="1.4" stroke-linecap="round"/></svg></div>
-      <div><div class="feat-title">Fingerprint & PIN unlock</div><div class="feat-desc">Biometric authentication via Android BiometricPrompt. PIN fallback with 4–6 digit support.</div></div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#C9A84C" stroke-width="1.5"/><polyline points="12,6 12,12 16,14" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <div><div class="feat-title">Configurable check-in timer</div><div class="feat-desc">Set intervals from 1 hour to 30 days. Visual countdown ring on the dashboard. Push notifications before deadline.</div></div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M6 19A5 5 0 0 1 6 9A6 6 0 0 1 18 11A4 4 0 0 1 18 19Z" stroke="#C9A84C" stroke-width="1.5"/><path d="M12 22V15M9.5 17.5L12 15L14.5 17.5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <div><div class="feat-title">Encrypted Google Drive backup</div><div class="feat-desc">Pro feature. Backup your vault to your private Drive folder. Restore on a new device — no data passes through our servers.</div></div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="12" rx="3" fill="#1A3516" stroke="#C9A84C" stroke-width="1.5"/><path d="M7 7A5 5 0 0 1 17 7" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/><path d="M7 11h10" stroke="#C9A84C" stroke-width="1" stroke-dasharray="2 2"/></svg></div>
-      <div><div class="feat-title">Recovery codes</div><div class="feat-desc">8 one-time recovery codes generated at setup. Use one to reset your PIN without losing your secrets.</div></div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3" stroke="#C9A84C" stroke-width="1.5"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/><circle cx="19" cy="8" r="2.5" stroke="#C9A84C" stroke-width="1.3"/><path d="M22 18c0-2.5-1.3-4.5-3-5.5" stroke="#C9A84C" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-      <div><div class="feat-title">Multiple emergency contacts</div><div class="feat-desc">Pro feature. Add multiple trusted people. Each receives your secrets when the dead man's switch triggers.</div></div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="#C9A84C" stroke-width="1.5"/><path d="M8 21h8M12 17v4" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <div><div class="feat-title">Home screen widget</div><div class="feat-desc">Countdown timer widget on your home screen. Tap to check in instantly without opening the app.</div></div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="#C9A84C" stroke-width="1.5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <div><div class="feat-title">Light, dark & auto theme</div><div class="feat-desc">Three theme options. Auto follows your system setting. Designed for comfortable use in any lighting condition.</div></div>
-    </div>
-  </div>
-</section>
+  <div class="plan featured"><div class="plan-popular">Most popular</div><div class="plan-name">Pro</div><div class="plan-price">€2.99<span>/mo</span></div><div class="plan-note">or €24.99/yr · 14-day free trial</div><ul class="plan-features">
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Unlimited secrets</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Multiple contacts</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Check-in from 1 hour</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Email + SMS simultaneously</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>GPS location on trigger</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Google Drive + OneDrive</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Device transfer</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>No ads</li>
+  </ul><a href="#download" class="plan-btn gold">Start free trial</a></div>
 
-<hr class="divider">
+  <div class="plan lifetime"><div class="plan-name">Lifetime</div><div class="plan-price">€99.99</div><div class="plan-note">one-time · no renewal</div><ul class="plan-features">
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Everything in Pro</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>All future updates</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Never pay again</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Priority support</li>
+  </ul>
+  <div class="breakeven"><div class="be-label">Break-even vs Pro</div><div class="be-row">Monthly · ~33 months</div><div class="be-row">Annual · ~4 years</div></div>
+  <a href="#download" class="plan-btn gold" style="margin-top:.9rem">Buy lifetime access</a></div>
+</div></section>
+<hr class="div">
 
-<!-- PRICING -->
-<section id="pricing" style="text-align:center">
-  <div class="section-label">Pricing</div>
-  <h2>Start free. Upgrade when you're ready.</h2>
-  <p class="section-sub" style="margin:0 auto 3rem">No credit card required to get started.</p>
-  <div class="pricing-grid">
-    <div class="plan">
-      <div class="plan-name">Free</div>
-      <div class="plan-price">€0</div>
-      <div class="plan-note">forever</div>
-      <ul class="plan-features">
-        <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>Up to 3 secrets</li>
-        <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>1 emergency contact</li>
-        <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>Check-in from 24 hours</li>
-        <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>PIN + fingerprint lock</li>
-        <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>Recovery codes</li>
-        <li class="no"><svg viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3l-8 8" stroke="#5A5848" stroke-width="1.5" stroke-linecap="round"/></svg>Google Drive backup</li>
-        <li class="no"><svg viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3l-8 8" stroke="#5A5848" stroke-width="1.5" stroke-linecap="round"/></svg>Multiple contacts</li>
-      </ul>
-      <a href="#download" class="plan-btn outline">Download free</a>
-    </div>
-    <div class="plan featured">
-      <div class="plan-popular">Most popular</div>
-      <div class="plan-name">Pro</div>
-      <div class="plan-price">€2.99<span>/month</span></div>
-      <div class="plan-note">or €24.99/year · 14-day free trial</div>
-      <ul class="plan-features">
-        <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Unlimited secrets</li>
-        <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Multiple emergency contacts</li>
-        <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Check-in from 1 hour</li>
-        <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>PIN + fingerprint lock</li>
-        <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Recovery codes</li>
-        <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Encrypted Drive backup</li>
-        <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>No ads</li>
-      </ul>
-      <a href="#download" class="plan-btn gold">Start free trial</a>
-    </div>
-  </div>
-</section>
+<section id="faq"><div class="sec-label">FAQ</div><h2>Common questions</h2>
+<div class="faq">
+  <div class="faq-item"><div class="faq-q" onclick="tFaq(this)">What if email fails — no internet? <span class="faq-chev">▼</span></div><div class="faq-a">The app tries Gmail first. If it fails due to no internet or any error, it automatically falls back to SMS via Twilio — sending a short access code to your emergency contact. Pro users can send both simultaneously for maximum reliability.</div></div>
+  <div class="faq-item"><div class="faq-q" onclick="tFaq(this)">Can Dead Man's Vault see my secrets? <span class="faq-chev">▼</span></div><div class="faq-a">No. Secrets are encrypted with AES-256-GCM using a key stored in the Android Hardware Security Module — a physical chip on your device. The key never leaves your device. We have no servers, no accounts, and no way to access your data.</div></div>
+  <div class="faq-item"><div class="faq-q" onclick="tFaq(this)">What if I lose my phone? <span class="faq-chev">▼</span></div><div class="faq-a">Pro subscribers can restore their vault on a new device using the encrypted backup from Google Drive or OneDrive. The backup is protected by your PIN — even if someone gains access to your cloud storage, they cannot read the backup without it.</div></div>
+  <div class="faq-item"><div class="faq-q" onclick="tFaq(this)">What if I forget my PIN? <span class="faq-chev">▼</span></div><div class="faq-a">Three recovery options: (1) use your fingerprint to confirm identity and set a new PIN, (2) use one of the 8 recovery codes generated at setup, or (3) Pro only — re-authenticate with Google or Microsoft and restore from your cloud backup.</div></div>
+  <div class="faq-item"><div class="faq-q" onclick="tFaq(this)">Why is the Lifetime plan worth it? <span class="faq-chev">▼</span></div><div class="faq-a">€99.99 once, everything Pro forever including all future updates. It pays for itself vs monthly in ~33 months, vs annual in ~4 years. If you plan to use the app long-term, Lifetime is the best value.</div></div>
+</div></section>
+<hr class="div">
 
-<hr class="divider">
+<section id="download"><div class="cta-banner"><h2>Your secrets deserve a plan.</h2><p>Free to start. No account required. Your data never leaves your device.</p><div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap"><a class="btn-p" href="#">Download on Google Play</a><a href="privacy-policy/" style="background:transparent;color:var(--gold-l);padding:.75rem 1.8rem;border-radius:9px;font-size:.95rem;border:0.5px solid rgba(201,168,76,.3);text-decoration:none">Read privacy policy</a></div><p class="cta-note">Android 8.0+ · 14-day Pro trial included</p></div></section>
 
-<!-- FAQ -->
-<section id="faq">
-  <div class="section-label">FAQ</div>
-  <h2>Common questions</h2>
-  <div class="faq">
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">What happens if I forget to check in? <span class="faq-chevron">▼</span></div>
-      <div class="faq-a">The app sends an email with your decrypted secrets to your emergency contact(s) via your own Gmail account. You receive push notification reminders before the deadline — when 50% of your interval has passed, and again at 80%. The email is only sent if you miss the final deadline completely.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">Can Dead Man's Vault see my secrets? <span class="faq-chevron">▼</span></div>
-      <div class="faq-a">No. Your secrets are encrypted with AES-256-GCM using a key that is stored in the Android Hardware Security Module — a physical chip on your device. The key never leaves your device. We have no servers, no accounts, and no way to access your data.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">What if I lose my phone? <span class="faq-chevron">▼</span></div>
-      <div class="faq-a">Pro subscribers can restore their vault on a new device using the encrypted backup from Google Drive. The backup is protected by your PIN — even if someone gains access to your Drive, they cannot read the backup without it. Free users can still recover their PIN using recovery codes if needed.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">What if I forget my PIN? <span class="faq-chevron">▼</span></div>
-      <div class="faq-a">You have three recovery options: (1) use your fingerprint to confirm your identity and set a new PIN, (2) use one of the 8 recovery codes generated when you set up your vault, or (3) if you're a Pro subscriber, re-authenticate with Google and restore from your Drive backup.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">Does the app require an internet connection? <span class="faq-chevron">▼</span></div>
-      <div class="faq-a">No. The core vault functionality — storing, viewing, and managing secrets, checking in, and PIN authentication — works entirely offline. Internet is only required for the Gmail send when the dead man's switch triggers, and for Google Drive backup/restore on Pro.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">How is this different from a password manager? <span class="faq-chevron">▼</span></div>
-      <div class="faq-a">Password managers are designed to help you access your passwords conveniently. Dead Man's Vault is designed to ensure someone else can access your information if something happens to you. It's not a replacement for a password manager — it's a complement to it, focused on emergency access and digital estate planning.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">Can I cancel my Pro subscription? <span class="faq-chevron">▼</span></div>
-      <div class="faq-a">Yes, at any time through your Google Play account. Your Pro features remain active until the end of the billing period. After cancellation, your vault reverts to free tier limits — your existing secrets are not deleted, but you won't be able to add new ones beyond the free limit.</div>
-    </div>
-  </div>
-</section>
+<footer><div class="foot-links"><a href="#how">How it works</a><a href="#feat">Features</a><a href="#price">Pricing</a><a href="#faq">FAQ</a><a href="privacy-policy/">Privacy policy</a><a href="mailto:privacy@deadmansvault.app">Contact</a></div><p>&copy; 2025 Dead Man's Vault &nbsp;·&nbsp; <a href="mailto:privacy@deadmansvault.app">privacy@deadmansvault.app</a></p></footer>
+</div>
 
-<hr class="divider">
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- PORTUGUÊS PT -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="lang-section" id="s-pt">
+<div class="hero"><div class="hero-bg"></div><div style="position:relative;z-index:1;width:100%">
+  <div class="hero-badge"><span class="badge-dot"></span>Encriptação AES-256 · os dados nunca saem do teu dispositivo</div>
+  <h1>Os teus segredos, seguros.<br><span>Partilhados se não puderes.</span></h1>
+  <p class="hero-sub">O Dead Man's Vault mantém as tuas informações mais sensíveis encriptadas no dispositivo — e entrega-as automaticamente a um contacto de confiança se não fizeres check-in.</p>
+  <div class="hero-btns"><a class="btn-p" href="#download">Descarregar para Android</a><a class="btn-g" href="#how-pt">Como funciona</a></div>
+  <p class="hero-note">Grátis para começar · PIN de 6 dígitos · Sem dados recolhidos · SMS de fallback incluído</p>
+  <div class="phone-wrap"><div class="phone-frame"><div class="pbar"><div class="pnotch"></div></div><div class="pscreen">
+    <div class="ps-status"><div class="ps-dot"></div><span class="ps-text">Cofre ativo</span><span class="ps-pro">PRO</span></div>
+    <div style="display:flex;justify-content:center;margin:8px 0"><svg width="90" height="90" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="#2A3028" stroke-width="7"/><circle cx="50" cy="50" r="42" fill="none" stroke="#C9A84C" stroke-width="7" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="66" transform="rotate(-90 50 50)"/><text x="50" y="46" text-anchor="middle" font-size="13" fill="#E8C97A" font-weight="600" font-family="system-ui">18h 22m</text><text x="50" y="59" text-anchor="middle" font-size="7" fill="#5A5848" font-family="system-ui">próximo check-in</text></svg></div>
+    <button class="ps-btn">Fazer check-in</button><button class="ps-ghost">Os meus segredos (12)</button>
+  </div></div></div>
+</div></div>
+<hr class="div">
+<section id="how-pt"><div class="sec-label">Como funciona</div><h2>Configuração simples. Proteção automática.</h2><p class="sec-sub">Três passos para garantir que as tuas informações chegam à pessoa certa — mesmo que não possas.</p>
+<div class="steps">
+  <div class="step-card" data-n="01"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 11V7A7 7 0 0 1 19 7V11" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/><rect x="3" y="11" width="18" height="12" rx="3" fill="#1A3516" stroke="#C9A84C" stroke-width="1.5"/><circle cx="12" cy="17" r="2" fill="#C9A84C"/></svg></div><div class="s-title">Cria o teu cofre</div><div class="s-desc">Define um PIN de 6 dígitos e desbloqueio por impressão digital. Adiciona os teus segredos — palavras-passe, documentos, mensagens. Tudo encriptado imediatamente com AES-256-GCM.</div></div>
+  <div class="step-card" data-n="02"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#C9A84C" stroke-width="1.5"/><polyline points="12,6 12,12 16,14" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="s-title">Define o check-in</div><div class="s-desc">Escolhe a frequência do check-in — de 1 hora a 30 dias. Adiciona email e número de telemóvel do contacto de emergência.</div></div>
+  <div class="step-card" data-n="03"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12" stroke="#C9A84C" stroke-width="1.5"/><path d="M1.61 3.44A2 2 0 0 1 3.6 1.26h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96" stroke="#C9A84C" stroke-width="1.5"/></svg></div><div class="s-title">Entrega automática</div><div class="s-desc">Se não fizeres check-in, a app envia os teus segredos por Gmail. Se não houver internet, o SMS entra automaticamente como fallback.</div></div>
+  <div class="step-card" data-n="04"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" fill="#1A3516"/><path d="M9 12l2 2 4-4" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="s-title">Mantém o controlo</div><div class="s-desc">Enquanto fizeres check-in regularmente, os teus segredos ficam privados. Altera o PIN, atualiza contactos ou ajusta o intervalo em qualquer momento.</div></div>
+</div></section>
+<hr class="div">
+<section><div class="sec-label">Preços</div><h2>Começa grátis. Melhora quando estiveres pronto.</h2><p class="sec-sub" style="margin:0 auto 2.5rem">Não precisas de cartão de crédito para começar.</p>
+<div class="pricing-grid">
+  <div class="plan"><div class="plan-name">Grátis</div><div class="plan-price">€0</div><div class="plan-note">para sempre</div><ul class="plan-features">
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>Até 3 segredos</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>1 contacto de emergência</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>Check-in a partir de 24h</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>PIN 6 dígitos + impressão digital</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>8 códigos de recuperação</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>Email + SMS fallback</li>
+    <li class="no"><svg viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3l-8 8" stroke="#5A5848" stroke-width="1.5" stroke-linecap="round"/></svg>Cópia de segurança na nuvem</li>
+    <li class="no"><svg viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3l-8 8" stroke="#5A5848" stroke-width="1.5" stroke-linecap="round"/></svg>Localização GPS</li>
+  </ul><a href="#download" class="plan-btn outline">Descarregar grátis</a></div>
+  <div class="plan featured"><div class="plan-popular">Mais popular</div><div class="plan-name">Pro</div><div class="plan-price">€2.99<span>/mês</span></div><div class="plan-note">ou €24.99/ano · 14 dias grátis</div><ul class="plan-features">
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Segredos ilimitados</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Múltiplos contactos</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Check-in a partir de 1 hora</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Email + SMS em simultâneo</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Localização GPS no disparo</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Google Drive + OneDrive</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Sem anúncios</li>
+  </ul><a href="#download" class="plan-btn gold">Iniciar período de teste</a></div>
+  <div class="plan lifetime"><div class="plan-name">Vitalício</div><div class="plan-price">€99.99</div><div class="plan-note">pagamento único · sem renovação</div><ul class="plan-features">
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Tudo do Pro</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Todas as atualizações futuras</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Nunca mais pagas</li>
+  </ul>
+  <div class="breakeven"><div class="be-label">Break-even vs Pro</div><div class="be-row">Mensal · ~33 meses</div><div class="be-row">Anual · ~4 anos</div></div>
+  <a href="#download" class="plan-btn gold" style="margin-top:.9rem">Comprar acesso vitalício</a></div>
+</div></section>
+<hr class="div">
+<section><div class="cta-banner"><h2>Os teus segredos merecem um plano.</h2><p>Grátis para começar. Sem conta necessária. Os teus dados nunca saem do dispositivo.</p><div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap"><a class="btn-p" href="#">Descarregar no Google Play</a><a href="privacy-policy/" style="background:transparent;color:var(--gold-l);padding:.75rem 1.8rem;border-radius:9px;font-size:.95rem;border:0.5px solid rgba(201,168,76,.3);text-decoration:none">Política de privacidade</a></div><p class="cta-note">Android 8.0+ · 14 dias de teste Pro incluídos</p></div></section>
+<footer><div class="foot-links"><a href="#how-pt">Como funciona</a><a href="#price">Preços</a><a href="privacy-policy/">Privacidade</a><a href="mailto:privacy@deadmansvault.app">Contacto</a></div><p>&copy; 2025 Dead Man's Vault &nbsp;·&nbsp; <a href="mailto:privacy@deadmansvault.app">privacy@deadmansvault.app</a></p></footer>
+</div>
 
-<!-- CTA -->
-<section id="download" style="padding:5rem 1.5rem">
-  <div class="cta-banner">
-    <h2>Your secrets deserve a plan.</h2>
-    <p>Free to start. No account required. Your data never leaves your device.</p>
-    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-      <a class="btn-primary" href="#">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" fill="currentColor"/></svg>
-        Download on Google Play
-      </a>
-      <a class="btn-ghost" href="privacy-policy/" style="border-color:rgba(201,168,76,.3);color:var(--gold-l)">Read privacy policy</a>
-    </div>
-    <p style="margin-top:1.25rem;font-size:.8rem;color:var(--text3)">Available for Android 8.0 and above · 14-day Pro trial included</p>
-  </div>
-</section>
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- PORTUGUÊS BR -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="lang-section" id="s-br">
+<div class="hero"><div class="hero-bg"></div><div style="position:relative;z-index:1;width:100%">
+  <div class="hero-badge"><span class="badge-dot"></span>Criptografia AES-256 · dados nunca saem do seu dispositivo</div>
+  <h1>Seus segredos, seguros.<br><span>Compartilhados se não puder.</span></h1>
+  <p class="hero-sub">O Dead Man's Vault mantém suas informações mais sensíveis criptografadas no dispositivo — e as entrega automaticamente a um contato de confiança se você não fizer check-in.</p>
+  <div class="hero-btns"><a class="btn-p" href="#download">Baixar para Android</a><a class="btn-g" href="#how-br">Como funciona</a></div>
+  <p class="hero-note">Grátis para começar · PIN de 6 dígitos · Sem coleta de dados · SMS de fallback incluído</p>
+  <div class="phone-wrap"><div class="phone-frame"><div class="pbar"><div class="pnotch"></div></div><div class="pscreen">
+    <div class="ps-status"><div class="ps-dot"></div><span class="ps-text">Cofre ativo</span><span class="ps-pro">PRO</span></div>
+    <div style="display:flex;justify-content:center;margin:8px 0"><svg width="90" height="90" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="#2A3028" stroke-width="7"/><circle cx="50" cy="50" r="42" fill="none" stroke="#C9A84C" stroke-width="7" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="66" transform="rotate(-90 50 50)"/><text x="50" y="46" text-anchor="middle" font-size="13" fill="#E8C97A" font-weight="600" font-family="system-ui">18h 22m</text><text x="50" y="59" text-anchor="middle" font-size="7" fill="#5A5848" font-family="system-ui">próximo check-in</text></svg></div>
+    <button class="ps-btn">Fazer check-in</button><button class="ps-ghost">Meus segredos (12)</button>
+  </div></div></div>
+</div></div>
+<hr class="div">
+<section id="how-br"><div class="sec-label">Como funciona</div><h2>Configuração simples. Proteção automática.</h2><p class="sec-sub">Três passos para garantir que suas informações cheguem à pessoa certa — mesmo que você não possa.</p>
+<div class="steps">
+  <div class="step-card" data-n="01"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 11V7A7 7 0 0 1 19 7V11" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/><rect x="3" y="11" width="18" height="12" rx="3" fill="#1A3516" stroke="#C9A84C" stroke-width="1.5"/><circle cx="12" cy="17" r="2" fill="#C9A84C"/></svg></div><div class="s-title">Crie seu cofre</div><div class="s-desc">Defina um PIN de 6 dígitos e desbloqueio por impressão digital. Adicione seus segredos — senhas, documentos, mensagens. Tudo criptografado com AES-256-GCM.</div></div>
+  <div class="step-card" data-n="02"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#C9A84C" stroke-width="1.5"/><polyline points="12,6 12,12 16,14" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="s-title">Configure o check-in</div><div class="s-desc">Escolha com que frequência fazer check-in — de 1 hora a 30 dias. Adicione e-mail e telefone do contato de emergência.</div></div>
+  <div class="step-card" data-n="03"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12" stroke="#C9A84C" stroke-width="1.5"/><path d="M1.61 3.44A2 2 0 0 1 3.6 1.26h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96" stroke="#C9A84C" stroke-width="1.5"/></svg></div><div class="s-title">Entrega automática</div><div class="s-desc">Se não fizer check-in, o app envia seus segredos por Gmail. Sem internet, o SMS entra automaticamente como fallback.</div></div>
+  <div class="step-card" data-n="04"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" fill="#1A3516"/><path d="M9 12l2 2 4-4" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="s-title">Mantenha o controle</div><div class="s-desc">Enquanto fizer check-in regularmente, seus segredos ficam privados. Altere o PIN, atualize contatos ou ajuste o intervalo quando quiser.</div></div>
+</div></section>
+<hr class="div">
+<section><div class="sec-label">Preços</div><h2>Comece grátis. Melhore quando estiver pronto.</h2><p class="sec-sub" style="margin:0 auto 2.5rem">Sem cartão de crédito para começar.</p>
+<div class="pricing-grid">
+  <div class="plan"><div class="plan-name">Grátis</div><div class="plan-price">€0</div><div class="plan-note">para sempre</div><ul class="plan-features">
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>Até 3 segredos</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>1 contato de emergência</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>Check-in a partir de 24h</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>PIN 6 dígitos + impressão digital</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>8 códigos de recuperação</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>E-mail + SMS fallback</li>
+    <li class="no"><svg viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3l-8 8" stroke="#5A5848" stroke-width="1.5" stroke-linecap="round"/></svg>Backup na nuvem</li>
+    <li class="no"><svg viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3l-8 8" stroke="#5A5848" stroke-width="1.5" stroke-linecap="round"/></svg>Localização GPS</li>
+  </ul><a href="#download" class="plan-btn outline">Baixar grátis</a></div>
+  <div class="plan featured"><div class="plan-popular">Mais popular</div><div class="plan-name">Pro</div><div class="plan-price">€2.99<span>/mês</span></div><div class="plan-note">ou €24.99/ano · 14 dias grátis</div><ul class="plan-features">
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Segredos ilimitados</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Múltiplos contatos</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Check-in a partir de 1 hora</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>E-mail + SMS simultaneamente</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>GPS no disparo</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Google Drive + OneDrive</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Sem anúncios</li>
+  </ul><a href="#download" class="plan-btn gold">Iniciar período de teste</a></div>
+  <div class="plan lifetime"><div class="plan-name">Vitalício</div><div class="plan-price">€99.99</div><div class="plan-note">pagamento único · sem renovação</div><ul class="plan-features">
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Tudo do Pro</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Todas as atualizações</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Pague uma vez</li>
+  </ul>
+  <div class="breakeven"><div class="be-label">Break-even vs Pro</div><div class="be-row">Mensal · ~33 meses</div><div class="be-row">Anual · ~4 anos</div></div>
+  <a href="#download" class="plan-btn gold" style="margin-top:.9rem">Comprar acesso vitalício</a></div>
+</div></section>
+<hr class="div">
+<section><div class="cta-banner"><h2>Seus segredos merecem um plano.</h2><p>Grátis para começar. Sem conta necessária. Seus dados nunca saem do dispositivo.</p><div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap"><a class="btn-p" href="#">Baixar no Google Play</a><a href="privacy-policy/" style="background:transparent;color:var(--gold-l);padding:.75rem 1.8rem;border-radius:9px;font-size:.95rem;border:0.5px solid rgba(201,168,76,.3);text-decoration:none">Política de privacidade</a></div><p class="cta-note">Android 8.0+ · 14 dias de teste Pro incluídos</p></div></section>
+<footer><div class="foot-links"><a href="#how-br">Como funciona</a><a href="#price">Preços</a><a href="privacy-policy/">Privacidade</a><a href="mailto:privacy@deadmansvault.app">Contato</a></div><p>&copy; 2025 Dead Man's Vault &nbsp;·&nbsp; <a href="mailto:privacy@deadmansvault.app">privacy@deadmansvault.app</a></p></footer>
+</div>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-links">
-    <a href="#how-it-works">How it works</a>
-    <a href="#features">Features</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#faq">FAQ</a>
-    <a href="privacy-policy/">Privacy policy</a>
-    <a href="mailto:privacy@deadmansvault.app">Contact</a>
-  </div>
-  <p>&copy; 2025 Dead Man's Vault &nbsp;·&nbsp; <a href="mailto:privacy@deadmansvault.app">privacy@deadmansvault.app</a></p>
-</footer>
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- DEUTSCH -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="lang-section" id="s-de">
+<div class="hero"><div class="hero-bg"></div><div style="position:relative;z-index:1;width:100%">
+  <div class="hero-badge"><span class="badge-dot"></span>AES-256-Verschlüsselung · Daten verlassen dein Gerät nie</div>
+  <h1>Deine Geheimnisse, sicher.<br><span>Geteilt, wenn du es nicht kannst.</span></h1>
+  <p class="hero-sub">Dead Man's Vault hält deine sensibelsten Informationen verschlüsselt auf deinem Gerät — und sendet sie automatisch an eine Vertrauensperson, wenn du nicht eincheckst.</p>
+  <div class="hero-btns"><a class="btn-p" href="#download">Für Android herunterladen</a><a class="btn-g" href="#how-de">So funktioniert es</a></div>
+  <p class="hero-note">Kostenlos starten · 6-stelliger PIN · Keine Datenerfassung · SMS-Fallback inklusive</p>
+  <div class="phone-wrap"><div class="phone-frame"><div class="pbar"><div class="pnotch"></div></div><div class="pscreen">
+    <div class="ps-status"><div class="ps-dot"></div><span class="ps-text">Tresor aktiv</span><span class="ps-pro">PRO</span></div>
+    <div style="display:flex;justify-content:center;margin:8px 0"><svg width="90" height="90" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="#2A3028" stroke-width="7"/><circle cx="50" cy="50" r="42" fill="none" stroke="#C9A84C" stroke-width="7" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="66" transform="rotate(-90 50 50)"/><text x="50" y="46" text-anchor="middle" font-size="13" fill="#E8C97A" font-weight="600" font-family="system-ui">18h 22m</text><text x="50" y="59" text-anchor="middle" font-size="7" fill="#5A5848" font-family="system-ui">nächster Check-in</text></svg></div>
+    <button class="ps-btn">Jetzt einchecken</button><button class="ps-ghost">Meine Geheimnisse (12)</button>
+  </div></div></div>
+</div></div>
+<hr class="div">
+<section id="how-de"><div class="sec-label">So funktioniert es</div><h2>Einfache Einrichtung. Automatischer Schutz.</h2><p class="sec-sub">Drei Schritte, um sicherzustellen, dass deine wichtigsten Informationen die richtige Person erreichen — auch wenn du es nicht kannst.</p>
+<div class="steps">
+  <div class="step-card" data-n="01"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 11V7A7 7 0 0 1 19 7V11" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/><rect x="3" y="11" width="18" height="12" rx="3" fill="#1A3516" stroke="#C9A84C" stroke-width="1.5"/><circle cx="12" cy="17" r="2" fill="#C9A84C"/></svg></div><div class="s-title">Tresor erstellen</div><div class="s-desc">Lege einen 6-stelligen PIN und Fingerabdruck-Entsperrung fest. Füge deine Geheimnisse hinzu — Passwörter, Dokumente, Nachrichten. Alles sofort mit AES-256-GCM verschlüsselt.</div></div>
+  <div class="step-card" data-n="02"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#C9A84C" stroke-width="1.5"/><polyline points="12,6 12,12 16,14" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="s-title">Check-in festlegen</div><div class="s-desc">Wähle die Check-in-Häufigkeit — von 1 Stunde bis 30 Tage. Füge E-Mail und Telefonnummer deines Notfallkontakts hinzu.</div></div>
+  <div class="step-card" data-n="03"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12" stroke="#C9A84C" stroke-width="1.5"/><path d="M1.61 3.44A2 2 0 0 1 3.6 1.26h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96" stroke="#C9A84C" stroke-width="1.5"/></svg></div><div class="s-title">Automatische Zustellung</div><div class="s-desc">Wenn du nicht eincheckst, sendet die App deine Geheimnisse per Gmail. Ohne Internet greift automatisch SMS als Fallback ein.</div></div>
+  <div class="step-card" data-n="04"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" fill="#1A3516"/><path d="M9 12l2 2 4-4" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="s-title">Kontrolle behalten</div><div class="s-desc">Solange du regelmäßig eincheckst, bleiben deine Geheimnisse privat. Ändere PIN, aktualisiere Kontakte oder passe das Intervall jederzeit an.</div></div>
+</div></section>
+<hr class="div">
+<section><div class="sec-label">Preise</div><h2>Kostenlos starten. Upgraden wenn bereit.</h2><p class="sec-sub" style="margin:0 auto 2.5rem">Keine Kreditkarte erforderlich.</p>
+<div class="pricing-grid">
+  <div class="plan"><div class="plan-name">Kostenlos</div><div class="plan-price">€0</div><div class="plan-note">für immer</div><ul class="plan-features">
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>Bis zu 3 Geheimnisse</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>1 Notfallkontakt</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>Check-in ab 24 Std.</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>6-stelliger PIN + Fingerabdruck</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>8 Wiederherstellungscodes</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>E-Mail + SMS-Fallback</li>
+    <li class="no"><svg viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3l-8 8" stroke="#5A5848" stroke-width="1.5" stroke-linecap="round"/></svg>Cloud-Sicherung</li>
+    <li class="no"><svg viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3l-8 8" stroke="#5A5848" stroke-width="1.5" stroke-linecap="round"/></svg>GPS-Standort</li>
+  </ul><a href="#download" class="plan-btn outline">Kostenlos herunterladen</a></div>
+  <div class="plan featured"><div class="plan-popular">Am beliebtesten</div><div class="plan-name">Pro</div><div class="plan-price">€2.99<span>/Monat</span></div><div class="plan-note">oder €24.99/Jahr · 14 Tage kostenlos</div><ul class="plan-features">
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Unbegrenzte Geheimnisse</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Mehrere Kontakte</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Check-in ab 1 Stunde</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>E-Mail + SMS gleichzeitig</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>GPS-Standort beim Auslösen</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Google Drive + OneDrive</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Keine Werbung</li>
+  </ul><a href="#download" class="plan-btn gold">Kostenlos testen</a></div>
+  <div class="plan lifetime"><div class="plan-name">Lebenslang</div><div class="plan-price">€99.99</div><div class="plan-note">Einmalzahlung · keine Verlängerung</div><ul class="plan-features">
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Alles aus Pro</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Alle zukünftigen Updates</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Nie wieder zahlen</li>
+  </ul>
+  <div class="breakeven"><div class="be-label">Break-even vs. Pro</div><div class="be-row">Monatlich · ~33 Monate</div><div class="be-row">Jährlich · ~4 Jahre</div></div>
+  <a href="#download" class="plan-btn gold" style="margin-top:.9rem">Lebenslangen Zugang kaufen</a></div>
+</div></section>
+<hr class="div">
+<section><div class="cta-banner"><h2>Deine Geheimnisse verdienen einen Plan.</h2><p>Kostenlos starten. Kein Konto erforderlich. Deine Daten verlassen das Gerät nie.</p><div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap"><a class="btn-p" href="#">Bei Google Play herunterladen</a><a href="privacy-policy/" style="background:transparent;color:var(--gold-l);padding:.75rem 1.8rem;border-radius:9px;font-size:.95rem;border:0.5px solid rgba(201,168,76,.3);text-decoration:none">Datenschutzrichtlinie</a></div><p class="cta-note">Android 8.0+ · 14 Tage Pro-Test inklusive</p></div></section>
+<footer><div class="foot-links"><a href="#how-de">So funktioniert es</a><a href="#price">Preise</a><a href="privacy-policy/">Datenschutz</a><a href="mailto:privacy@deadmansvault.app">Kontakt</a></div><p>&copy; 2025 Dead Man's Vault &nbsp;·&nbsp; <a href="mailto:privacy@deadmansvault.app">privacy@deadmansvault.app</a></p></footer>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- FRANÇAIS -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="lang-section" id="s-fr">
+<div class="hero"><div class="hero-bg"></div><div style="position:relative;z-index:1;width:100%">
+  <div class="hero-badge"><span class="badge-dot"></span>Chiffrement AES-256 · données jamais transmises depuis votre appareil</div>
+  <h1>Vos secrets, protégés.<br><span>Partagés si vous ne pouvez pas.</span></h1>
+  <p class="hero-sub">Dead Man's Vault garde vos informations les plus sensibles chiffrées sur votre appareil — et les transmet automatiquement à un contact de confiance si vous manquez un check-in.</p>
+  <div class="hero-btns"><a class="btn-p" href="#download">Télécharger pour Android</a><a class="btn-g" href="#how-fr">Comment ça marche</a></div>
+  <p class="hero-note">Gratuit pour commencer · PIN 6 chiffres · Aucune donnée collectée · SMS de secours inclus</p>
+  <div class="phone-wrap"><div class="phone-frame"><div class="pbar"><div class="pnotch"></div></div><div class="pscreen">
+    <div class="ps-status"><div class="ps-dot"></div><span class="ps-text">Coffre actif</span><span class="ps-pro">PRO</span></div>
+    <div style="display:flex;justify-content:center;margin:8px 0"><svg width="90" height="90" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="#2A3028" stroke-width="7"/><circle cx="50" cy="50" r="42" fill="none" stroke="#C9A84C" stroke-width="7" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="66" transform="rotate(-90 50 50)"/><text x="50" y="46" text-anchor="middle" font-size="13" fill="#E8C97A" font-weight="600" font-family="system-ui">18h 22m</text><text x="50" y="59" text-anchor="middle" font-size="7" fill="#5A5848" font-family="system-ui">prochain check-in</text></svg></div>
+    <button class="ps-btn">Effectuer le check-in</button><button class="ps-ghost">Mes secrets (12)</button>
+  </div></div></div>
+</div></div>
+<hr class="div">
+<section id="how-fr"><div class="sec-label">Comment ça marche</div><h2>Configuration simple. Protection automatique.</h2><p class="sec-sub">Trois étapes pour s'assurer que vos informations arrivent à la bonne personne — même si vous ne pouvez pas.</p>
+<div class="steps">
+  <div class="step-card" data-n="01"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 11V7A7 7 0 0 1 19 7V11" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/><rect x="3" y="11" width="18" height="12" rx="3" fill="#1A3516" stroke="#C9A84C" stroke-width="1.5"/><circle cx="12" cy="17" r="2" fill="#C9A84C"/></svg></div><div class="s-title">Créer votre coffre</div><div class="s-desc">Définissez un code PIN à 6 chiffres et le déverrouillage par empreinte. Ajoutez vos secrets — mots de passe, documents, messages. Tout chiffré avec AES-256-GCM.</div></div>
+  <div class="step-card" data-n="02"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#C9A84C" stroke-width="1.5"/><polyline points="12,6 12,12 16,14" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="s-title">Configurer le check-in</div><div class="s-desc">Choisissez la fréquence — de 1 heure à 30 jours. Ajoutez l'e-mail et le téléphone de votre contact d'urgence.</div></div>
+  <div class="step-card" data-n="03"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12" stroke="#C9A84C" stroke-width="1.5"/><path d="M1.61 3.44A2 2 0 0 1 3.6 1.26h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96" stroke="#C9A84C" stroke-width="1.5"/></svg></div><div class="s-title">Livraison automatique</div><div class="s-desc">Si vous manquez un check-in, l'application envoie vos secrets par Gmail. Sans connexion, le SMS prend automatiquement le relais.</div></div>
+  <div class="step-card" data-n="04"><div class="s-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" fill="#1A3516"/><path d="M9 12l2 2 4-4" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="s-title">Restez en contrôle</div><div class="s-desc">Tant que vous effectuez les check-ins, vos secrets restent privés. Modifiez le PIN, les contacts ou l'intervalle à tout moment.</div></div>
+</div></section>
+<hr class="div">
+<section><div class="sec-label">Tarifs</div><h2>Commencez gratuitement. Passez au Pro quand vous voulez.</h2><p class="sec-sub" style="margin:0 auto 2.5rem">Aucune carte bancaire requise.</p>
+<div class="pricing-grid">
+  <div class="plan"><div class="plan-name">Gratuit</div><div class="plan-price">€0</div><div class="plan-note">pour toujours</div><ul class="plan-features">
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>Jusqu'à 3 secrets</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>1 contact d'urgence</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>Check-in dès 24h</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>PIN 6 chiffres + empreinte</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>8 codes de récupération</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#27AE60" stroke-width="1.5" stroke-linecap="round"/></svg>E-mail + SMS de secours</li>
+    <li class="no"><svg viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3l-8 8" stroke="#5A5848" stroke-width="1.5" stroke-linecap="round"/></svg>Sauvegarde cloud</li>
+    <li class="no"><svg viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3l-8 8" stroke="#5A5848" stroke-width="1.5" stroke-linecap="round"/></svg>Localisation GPS</li>
+  </ul><a href="#download" class="plan-btn outline">Télécharger gratuitement</a></div>
+  <div class="plan featured"><div class="plan-popular">Le plus populaire</div><div class="plan-name">Pro</div><div class="plan-price">€2.99<span>/mois</span></div><div class="plan-note">ou €24.99/an · 14 jours gratuits</div><ul class="plan-features">
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Secrets illimités</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Contacts multiples</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Check-in dès 1 heure</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>E-mail + SMS simultanément</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>GPS au déclenchement</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Google Drive + OneDrive</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Sans publicité</li>
+  </ul><a href="#download" class="plan-btn gold">Commencer l'essai gratuit</a></div>
+  <div class="plan lifetime"><div class="plan-name">À vie</div><div class="plan-price">€99.99</div><div class="plan-note">paiement unique · sans renouvellement</div><ul class="plan-features">
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Tout du Pro</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Toutes les mises à jour</li>
+    <li><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-6" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>Ne plus jamais payer</li>
+  </ul>
+  <div class="breakeven"><div class="be-label">Rentabilité vs Pro</div><div class="be-row">Mensuel · ~33 mois</div><div class="be-row">Annuel · ~4 ans</div></div>
+  <a href="#download" class="plan-btn gold" style="margin-top:.9rem">Acheter l'accès à vie</a></div>
+</div></section>
+<hr class="div">
+<section><div class="cta-banner"><h2>Vos secrets méritent un plan.</h2><p>Gratuit pour commencer. Sans compte requis. Vos données ne quittent jamais l'appareil.</p><div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap"><a class="btn-p" href="#">Télécharger sur Google Play</a><a href="privacy-policy/" style="background:transparent;color:var(--gold-l);padding:.75rem 1.8rem;border-radius:9px;font-size:.95rem;border:0.5px solid rgba(201,168,76,.3);text-decoration:none">Politique de confidentialité</a></div><p class="cta-note">Android 8.0+ · 14 jours d'essai Pro inclus</p></div></section>
+<footer><div class="foot-links"><a href="#how-fr">Comment ça marche</a><a href="#price">Tarifs</a><a href="privacy-policy/">Confidentialité</a><a href="mailto:privacy@deadmansvault.app">Contact</a></div><p>&copy; 2025 Dead Man's Vault &nbsp;·&nbsp; <a href="mailto:privacy@deadmansvault.app">privacy@deadmansvault.app</a></p></footer>
+</div>
 
 <script>
-function toggleFaq(el) {
+const langs = ['en','pt','br','de','fr'];
+function setLang(l, btn) {
+  langs.forEach(x => {
+    document.getElementById('s-'+x).classList.toggle('active', x === l);
+  });
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function tFaq(el) {
   const a = el.nextElementSibling;
-  const c = el.querySelector('.faq-chevron');
-  const isOpen = a.classList.contains('open');
+  const c = el.querySelector('.faq-chev');
+  const open = a.classList.contains('open');
   document.querySelectorAll('.faq-a').forEach(x => x.classList.remove('open'));
-  document.querySelectorAll('.faq-chevron').forEach(x => x.style.transform = '');
-  if (!isOpen) { a.classList.add('open'); c.style.transform = 'rotate(180deg)'; }
+  document.querySelectorAll('.faq-chev').forEach(x => x.style.transform='');
+  if (!open) { a.classList.add('open'); c.style.transform='rotate(180deg)'; }
 }
 </script>
 </body>
