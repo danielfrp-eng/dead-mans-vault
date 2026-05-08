@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Dead Man's Vault — Terms of Service">
+<title>Dead Man's Vault — Terms of Service</title>
+<style>
+  :root {
+    --gold: #C9A84C; --gold-l: #E8C97A;
+    --green: #1A3516; --black: #0A0C0A; --card: #111410;
+    --border: #2A3028; --text: #F0EDD8; --text2: #9A9880; --text3: #5A5848;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: var(--black); color: var(--text); line-height: 1.7; }
+  header { background: var(--card); border-bottom: 0.5px solid var(--border); padding: 1.5rem 2rem; display: flex; align-items: center; gap: 1rem; position: sticky; top: 0; z-index: 10; }
+  .logo { width: 40px; height: 40px; border-radius: 10px; background: var(--green); border: 1px solid #3A3020; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .logo svg { width: 22px; height: 22px; }
+  .header-text h1 { font-size: 1rem; font-weight: 600; color: var(--gold-l); }
+  .header-text p { font-size: 0.78rem; color: var(--text2); }
+  .lang-bar { background: var(--card); border-bottom: 0.5px solid var(--border); padding: .6rem 2rem; display: flex; gap: .5rem; flex-wrap: wrap; }
+  .lang-btn { background: transparent; border: 0.5px solid var(--border); border-radius: 6px; padding: .3rem .8rem; font-size: .8rem; color: var(--text2); cursor: pointer; transition: all .15s; }
+  .lang-btn.active, .lang-btn:hover { border-color: #3A3020; color: var(--gold); background: var(--green); }
+  .content { max-width: 780px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+  .section { display: none; }
+  .section.active { display: block; }
+  .last-updated { font-size: .78rem; color: var(--text3); margin-bottom: 2rem; padding: .5rem .8rem; background: var(--card); border: 0.5px solid var(--border); border-radius: 6px; display: inline-block; }
+  h2 { font-size: 1.35rem; font-weight: 600; color: var(--gold-l); margin: 2rem 0 .6rem; padding-bottom: .4rem; border-bottom: 0.5px solid var(--border); }
+  h3 { font-size: 1rem; font-weight: 500; color: var(--gold); margin: 1.4rem 0 .4rem; }
+  p { font-size: .93rem; color: var(--text2); margin-bottom: .9rem; }
+  ul { padding-left: 1.4rem; margin-bottom: .9rem; }
+  li { font-size: .93rem; color: var(--text2); margin-bottom: .3rem; }
+  .highlight { background: var(--green); border: 0.5px solid #3A3020; border-radius: 10px; padding: 1rem 1.2rem; margin: 1.2rem 0; }
+  .highlight p { color: var(--gold-l); margin: 0; font-weight: 500; }
+  .highlight .sub { color: var(--text2); font-size: .85rem; font-weight: 400; margin-top: .3rem; }
+  .contact-card { background: var(--card); border: 0.5px solid var(--border); border-radius: 10px; padding: 1rem 1.2rem; margin-top: 1rem; }
+  .contact-card a { color: var(--gold); text-decoration: none; }
+  footer { text-align: center; padding: 2rem; font-size: .75rem; color: var(--text3); border-top: 0.5px solid var(--border); }
+  a { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <svg viewBox="0 0 24 24" fill="none">
+      <path d="M12 2L20 6V12C20 17 16 21 12 23C8 21 4 17 4 12V6Z" fill="#1A3516" stroke="#C9A84C" stroke-width="1.5"/>
+      <rect x="8" y="13" width="8" height="6" rx="1.5" fill="#C9A84C" fill-opacity=".15" stroke="#C9A84C" stroke-width="1.2"/>
+      <path d="M9.5 13V10.5A2.5 2.5 0 0 1 14.5 10.5V13" stroke="#C9A84C" stroke-width="1.4" stroke-linecap="round"/>
+      <circle cx="12" cy="16" r="1" fill="#C9A84C"/>
+    </svg>
+  </div>
+  <div class="header-text">
+    <h1>Dead Man's Vault</h1>
+    <p id="header-subtitle">Terms of Service</p>
+  </div>
+</header>
+
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('en', this)">English</button>
+  <button class="lang-btn" onclick="setLang('pt', this)">Português (PT)</button>
+  <button class="lang-btn" onclick="setLang('br', this)">Português (BR)</button>
+  <button class="lang-btn" onclick="setLang('de', this)">Deutsch</button>
+  <button class="lang-btn" onclick="setLang('fr', this)">Français</button>
+</div>
+
+<div class="content">
+
+<!-- ═══════════════════════════════ ENGLISH ═══════════════════════════════ -->
+<div class="section active" id="s-en">
+  <span class="last-updated">Last updated: May 2025</span>
+
+  <div class="highlight">
+    <p>Dead Man's Vault is a tool to protect and automatically deliver your secrets. By using this app, you agree to these terms.</p>
+    <p class="sub">Please read them carefully. They are written in plain language — no legalese.</p>
+  </div>
+
+  <h2>1. Acceptance of Terms</h2>
+  <p>By downloading, installing, or using Dead Man's Vault ("the app"), you agree to be bound by these Terms of Service. If you do not agree, do not use the app.</p>
+  <p>These terms apply to all versions of the app — Free, Pro, and Lifetime.</p>
+
+  <h2>2. What the App Does</h2>
+  <p>Dead Man's Vault is a dead man's switch application that:</p>
+  <ul>
+    <li>Encrypts and stores sensitive information ("secrets") on your device using AES-256-GCM</li>
+    <li>Monitors your check-in activity and sends alerts when you miss a check-in</li>
+    <li>Automatically delivers your secrets to designated contacts if you fail to check in within your chosen interval</li>
+    <li>Optionally shares your GPS location when the switch triggers (Pro feature)</li>
+  </ul>
+
+  <h2>3. Your Responsibilities</h2>
+  <h3>3.1 PIN and security</h3>
+  <p>You are solely responsible for keeping your 6-digit PIN and recovery codes safe. If you lose access to your PIN and recovery codes, your vault data cannot be recovered. We have no access to your PIN or encrypted data.</p>
+
+  <h3>3.2 Contact consent</h3>
+  <p>You are responsible for ensuring that any person you add as an emergency contact has consented to receive automated messages from this app. You must not add contacts without their knowledge.</p>
+
+  <h3>3.3 Content of secrets</h3>
+  <p>You may store any personal information in your vault. You are solely responsible for the legality of the content you store and the information you send to your contacts when the switch triggers.</p>
+
+  <h3>3.4 Check-in intervals</h3>
+  <p>You are responsible for setting an appropriate check-in interval. Setting a very short interval (e.g. 1 hour) increases the risk of accidental triggers. We are not liable for unintended deliveries caused by a missed check-in.</p>
+
+  <h2>4. Free Plan Limitations</h2>
+  <p>The Free plan includes:</p>
+  <ul>
+    <li>Up to 3 secrets</li>
+    <li>Up to 3 emergency contacts</li>
+    <li>Fixed 24-hour check-in interval</li>
+    <li>Ad-supported experience (via Google AdMob)</li>
+  </ul>
+  <p>Pro features (configurable interval, GPS, cloud backup, groups, no ads) require a paid subscription or lifetime purchase.</p>
+
+  <h2>5. Subscriptions and Payments</h2>
+  <h3>5.1 Pro subscription</h3>
+  <p>The Pro plan is available as a monthly (€2.99/month) or annual (€24.99/year) subscription, with a 14-day free trial. Subscriptions are managed through Google Play and are subject to Google Play's billing terms.</p>
+
+  <h3>5.2 Lifetime access</h3>
+  <p>The Lifetime plan is a one-time purchase (€99.99) that grants permanent access to all Pro features, including all future updates, for as long as the app exists.</p>
+
+  <h3>5.3 Cancellations and refunds</h3>
+  <p>You may cancel your subscription at any time through Google Play. Refunds are handled according to Google Play's refund policy. We do not process refunds directly.</p>
+
+  <h2>6. Data and Privacy</h2>
+  <p>Your secrets are encrypted on your device and never transmitted to our servers. We do not collect, store, or have access to your personal data. For full details, see our <a href="https://deadmansvault-app.github.io/dead-mans-vault/privacy-policy/">Privacy Policy</a>.</p>
+
+  <h2>7. Disclaimers and Limitations of Liability</h2>
+  <h3>7.1 No guarantee of delivery</h3>
+  <p>The app relies on your device being operational, having internet or SMS connectivity, and background processes being allowed to run. We cannot guarantee delivery of secrets in all circumstances (e.g. device off, no connectivity, OS restrictions on background tasks).</p>
+
+  <h3>7.2 No warranty</h3>
+  <p>The app is provided "as is" without warranties of any kind. We do not warrant that the app will be uninterrupted, error-free, or that it will meet your specific requirements.</p>
+
+  <h3>7.3 Limitation of liability</h3>
+  <p>To the maximum extent permitted by applicable law, we shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of — or inability to use — the app, including but not limited to loss of data, failed deliveries, or accidental triggers.</p>
+
+  <h2>8. Modifications to the App and Terms</h2>
+  <p>We reserve the right to modify the app and these terms at any time. Material changes will be communicated via an in-app notice or update. Continued use of the app after changes constitutes acceptance of the new terms.</p>
+  <p>We will never remove features from existing paid plans without offering a comparable alternative or refund.</p>
+
+  <h2>9. Termination</h2>
+  <p>You may stop using the app at any time by uninstalling it. Uninstalling the app permanently deletes all your encrypted data from the device. Cloud backups (Pro feature) must be deleted separately from Google Drive or OneDrive.</p>
+
+  <h2>10. Governing Law</h2>
+  <p>These terms are governed by the laws of Portugal. Any disputes shall be subject to the exclusive jurisdiction of the courts of Portugal.</p>
+
+  <h2>11. Contact</h2>
+  <p>If you have questions about these Terms of Service, please contact us:</p>
+  <div class="contact-card">
+    <p style="margin:0">📧 <a href="mailto:privacy@deadmansvault.app">privacy@deadmansvault.app</a></p>
+    <p style="margin:.4rem 0 0;font-size:.85rem;color:var(--text3)">Dead Man's Vault · deadmansvault.app</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ PORTUGUÊS PT ═══════════════════════════════ -->
+<div class="section" id="s-pt">
+  <span class="last-updated">Última atualização: maio de 2025</span>
+
+  <div class="highlight">
+    <p>O Dead Man's Vault é uma ferramenta para proteger e entregar automaticamente os teus segredos. Ao usar esta app, concordas com estes termos.</p>
+    <p class="sub">Lê-os com atenção. Estão escritos em linguagem simples — sem juridês.</p>
+  </div>
+
+  <h2>1. Aceitação dos Termos</h2>
+  <p>Ao descarregar, instalar ou usar o Dead Man's Vault ("a app"), aceitas ficar vinculado a estes Termos de Serviço. Se não concordares, não uses a app.</p>
+  <p>Estes termos aplicam-se a todas as versões da app — Grátis, Pro e Vitalício.</p>
+
+  <h2>2. O Que a App Faz</h2>
+  <p>O Dead Man's Vault é uma aplicação de dead man's switch que:</p>
+  <ul>
+    <li>Encripta e armazena informação sensível ("segredos") no teu dispositivo com AES-256-GCM</li>
+    <li>Monitoriza a tua atividade de check-in e envia alertas quando não o realizas</li>
+    <li>Entrega automaticamente os teus segredos aos contactos designados se não fizeres check-in dentro do intervalo definido</li>
+    <li>Partilha opcionalmente a tua localização GPS quando o switch é ativado (funcionalidade Pro)</li>
+  </ul>
+
+  <h2>3. As Tuas Responsabilidades</h2>
+  <h3>3.1 PIN e segurança</h3>
+  <p>És o único responsável por manter o teu PIN de 6 dígitos e os códigos de recuperação em segurança. Se perderes o acesso ao PIN e aos códigos de recuperação, os dados do cofre não poderão ser recuperados. Não temos acesso ao teu PIN nem aos teus dados encriptados.</p>
+
+  <h3>3.2 Consentimento dos contactos</h3>
+  <p>És responsável por garantir que qualquer pessoa que adiciones como contacto de emergência tenha consentido em receber mensagens automáticas desta app. Não deves adicionar contactos sem o seu conhecimento.</p>
+
+  <h3>3.3 Conteúdo dos segredos</h3>
+  <p>Podes guardar qualquer informação pessoal no teu cofre. És o único responsável pela legalidade do conteúdo que armazenas e da informação que envias aos teus contactos quando o switch é ativado.</p>
+
+  <h3>3.4 Intervalos de check-in</h3>
+  <p>És responsável por definir um intervalo de check-in adequado. Um intervalo muito curto (ex: 1 hora) aumenta o risco de ativações acidentais. Não somos responsáveis por entregas não intencionais causadas por um check-in falhado.</p>
+
+  <h2>4. Limitações do Plano Grátis</h2>
+  <p>O plano Grátis inclui:</p>
+  <ul>
+    <li>Até 3 segredos</li>
+    <li>Até 3 contactos de emergência</li>
+    <li>Intervalo de check-in fixo de 24 horas</li>
+    <li>Experiência com anúncios (via Google AdMob)</li>
+  </ul>
+  <p>As funcionalidades Pro (intervalo configurável, GPS, cópia de segurança na nuvem, grupos, sem anúncios) requerem uma subscrição paga ou compra vitalícia.</p>
+
+  <h2>5. Subscrições e Pagamentos</h2>
+  <h3>5.1 Subscrição Pro</h3>
+  <p>O plano Pro está disponível como subscrição mensal (€2,99/mês) ou anual (€24,99/ano), com 14 dias de prova gratuita. As subscrições são geridas pela Google Play e estão sujeitas aos termos de faturação da Google Play.</p>
+
+  <h3>5.2 Acesso Vitalício</h3>
+  <p>O plano Vitalício é uma compra única (€99,99) que concede acesso permanente a todas as funcionalidades Pro, incluindo todas as atualizações futuras, enquanto a app existir.</p>
+
+  <h3>5.3 Cancelamentos e reembolsos</h3>
+  <p>Podes cancelar a tua subscrição a qualquer momento através da Google Play. Os reembolsos são processados de acordo com a política de reembolso da Google Play. Não processamos reembolsos diretamente.</p>
+
+  <h2>6. Dados e Privacidade</h2>
+  <p>Os teus segredos são encriptados no teu dispositivo e nunca são transmitidos para os nossos servidores. Não recolhemos, armazenamos nem temos acesso aos teus dados pessoais. Para mais detalhes, consulta a nossa <a href="https://deadmansvault-app.github.io/dead-mans-vault/privacy-policy/">Política de Privacidade</a>.</p>
+
+  <h2>7. Isenções de Responsabilidade</h2>
+  <h3>7.1 Sem garantia de entrega</h3>
+  <p>A app depende do teu dispositivo estar operacional, ter conectividade à internet ou SMS, e os processos em segundo plano estarem autorizados. Não podemos garantir a entrega de segredos em todas as circunstâncias (ex: dispositivo desligado, sem conectividade, restrições do sistema operativo).</p>
+
+  <h3>7.2 Sem garantias</h3>
+  <p>A app é fornecida "tal como está", sem garantias de qualquer tipo. Não garantimos que a app seja ininterrupta, isenta de erros ou que satisfaça os teus requisitos específicos.</p>
+
+  <h3>7.3 Limitação de responsabilidade</h3>
+  <p>Na medida máxima permitida pela lei aplicável, não seremos responsáveis por quaisquer danos indiretos, incidentais, especiais ou consequentes resultantes do uso — ou incapacidade de usar — a app, incluindo perda de dados, falhas na entrega ou ativações acidentais.</p>
+
+  <h2>8. Modificações à App e aos Termos</h2>
+  <p>Reservamo-nos o direito de modificar a app e estes termos a qualquer momento. Alterações relevantes serão comunicadas através de um aviso na app ou atualização. A utilização continuada da app após as alterações constitui aceitação dos novos termos.</p>
+  <p>Nunca removeremos funcionalidades dos planos pagos existentes sem oferecer uma alternativa comparável ou reembolso.</p>
+
+  <h2>9. Rescisão</h2>
+  <p>Podes deixar de usar a app a qualquer momento desinstalando-a. A desinstalação elimina permanentemente todos os teus dados encriptados do dispositivo. As cópias de segurança na nuvem (funcionalidade Pro) devem ser eliminadas separadamente do Google Drive ou OneDrive.</p>
+
+  <h2>10. Lei Aplicável</h2>
+  <p>Estes termos são regidos pelas leis de Portugal. Quaisquer disputas ficam sujeitas à jurisdição exclusiva dos tribunais portugueses.</p>
+
+  <h2>11. Contacto</h2>
+  <p>Se tiveres dúvidas sobre estes Termos de Serviço, contacta-nos:</p>
+  <div class="contact-card">
+    <p style="margin:0">📧 <a href="mailto:privacy@deadmansvault.app">privacy@deadmansvault.app</a></p>
+    <p style="margin:.4rem 0 0;font-size:.85rem;color:var(--text3)">Dead Man's Vault · deadmansvault.app</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ PORTUGUÊS BR ═══════════════════════════════ -->
+<div class="section" id="s-br">
+  <span class="last-updated">Última atualização: maio de 2025</span>
+
+  <div class="highlight">
+    <p>O Dead Man's Vault é uma ferramenta para proteger e entregar automaticamente seus segredos. Ao usar este app, você concorda com estes termos.</p>
+    <p class="sub">Leia com atenção. Estão escritos em linguagem simples — sem juridiquês.</p>
+  </div>
+
+  <h2>1. Aceitação dos Termos</h2>
+  <p>Ao baixar, instalar ou usar o Dead Man's Vault ("o app"), você concorda em ficar vinculado a estes Termos de Serviço. Se não concordar, não use o app.</p>
+  <p>Estes termos se aplicam a todas as versões do app — Grátis, Pro e Vitalício.</p>
+
+  <h2>2. O Que o App Faz</h2>
+  <p>O Dead Man's Vault é um aplicativo de dead man's switch que:</p>
+  <ul>
+    <li>Criptografa e armazena informações sensíveis ("segredos") no seu dispositivo com AES-256-GCM</li>
+    <li>Monitora sua atividade de check-in e envia alertas quando você não o realiza</li>
+    <li>Entrega automaticamente seus segredos aos contatos designados se você não fizer check-in dentro do intervalo definido</li>
+    <li>Compartilha opcionalmente sua localização GPS quando o switch é ativado (recurso Pro)</li>
+  </ul>
+
+  <h2>3. Suas Responsabilidades</h2>
+  <h3>3.1 PIN e segurança</h3>
+  <p>Você é o único responsável por manter seu PIN de 6 dígitos e os códigos de recuperação em segurança. Se perder o acesso ao PIN e aos códigos de recuperação, os dados do cofre não poderão ser recuperados. Não temos acesso ao seu PIN nem aos seus dados criptografados.</p>
+
+  <h3>3.2 Consentimento dos contatos</h3>
+  <p>Você é responsável por garantir que qualquer pessoa que adicionar como contato de emergência tenha consentido em receber mensagens automáticas deste app. Não adicione contatos sem o conhecimento deles.</p>
+
+  <h3>3.3 Conteúdo dos segredos</h3>
+  <p>Você pode armazenar qualquer informação pessoal no seu cofre. Você é o único responsável pela legalidade do conteúdo que armazena e das informações que envia aos seus contatos quando o switch é ativado.</p>
+
+  <h3>3.4 Intervalos de check-in</h3>
+  <p>Você é responsável por definir um intervalo de check-in adequado. Um intervalo muito curto (ex: 1 hora) aumenta o risco de ativações acidentais. Não somos responsáveis por entregas não intencionais causadas por um check-in perdido.</p>
+
+  <h2>4. Limitações do Plano Grátis</h2>
+  <p>O plano Grátis inclui:</p>
+  <ul>
+    <li>Até 3 segredos</li>
+    <li>Até 3 contatos de emergência</li>
+    <li>Intervalo de check-in fixo de 24 horas</li>
+    <li>Experiência com anúncios (via Google AdMob)</li>
+  </ul>
+  <p>Os recursos Pro (intervalo configurável, GPS, backup na nuvem, grupos, sem anúncios) requerem uma assinatura paga ou compra vitalícia.</p>
+
+  <h2>5. Assinaturas e Pagamentos</h2>
+  <h3>5.1 Assinatura Pro</h3>
+  <p>O plano Pro está disponível como assinatura mensal (€2,99/mês) ou anual (€24,99/ano), com 14 dias de teste gratuito. As assinaturas são gerenciadas pela Google Play e estão sujeitas aos termos de cobrança da Google Play.</p>
+
+  <h3>5.2 Acesso Vitalício</h3>
+  <p>O plano Vitalício é uma compra única (€99,99) que concede acesso permanente a todos os recursos Pro, incluindo todas as atualizações futuras, enquanto o app existir.</p>
+
+  <h3>5.3 Cancelamentos e reembolsos</h3>
+  <p>Você pode cancelar sua assinatura a qualquer momento pela Google Play. Os reembolsos são processados conforme a política de reembolso da Google Play. Não processamos reembolsos diretamente.</p>
+
+  <h2>6. Dados e Privacidade</h2>
+  <p>Seus segredos são criptografados no seu dispositivo e nunca são transmitidos para nossos servidores. Não coletamos, armazenamos nem temos acesso aos seus dados pessoais. Para mais detalhes, consulte nossa <a href="https://deadmansvault-app.github.io/dead-mans-vault/privacy-policy/">Política de Privacidade</a>.</p>
+
+  <h2>7. Isenções de Responsabilidade</h2>
+  <h3>7.1 Sem garantia de entrega</h3>
+  <p>O app depende do seu dispositivo estar operacional, ter conectividade à internet ou SMS, e os processos em segundo plano estarem autorizados. Não podemos garantir a entrega de segredos em todas as circunstâncias (ex: dispositivo desligado, sem conectividade, restrições do sistema operacional).</p>
+
+  <h3>7.2 Sem garantias</h3>
+  <p>O app é fornecido "como está", sem garantias de qualquer tipo. Não garantimos que o app seja ininterrupto, livre de erros ou que atenda às suas necessidades específicas.</p>
+
+  <h3>7.3 Limitação de responsabilidade</h3>
+  <p>Na medida máxima permitida pela lei aplicável, não seremos responsáveis por quaisquer danos indiretos, incidentais, especiais ou consequentes resultantes do uso — ou incapacidade de usar — o app, incluindo perda de dados, falhas na entrega ou ativações acidentais.</p>
+
+  <h2>8. Modificações ao App e aos Termos</h2>
+  <p>Reservamo-nos o direito de modificar o app e estes termos a qualquer momento. Alterações relevantes serão comunicadas por meio de um aviso no app ou atualização. O uso continuado do app após as alterações constitui aceitação dos novos termos.</p>
+  <p>Nunca removeremos recursos dos planos pagos existentes sem oferecer uma alternativa comparável ou reembolso.</p>
+
+  <h2>9. Rescisão</h2>
+  <p>Você pode parar de usar o app a qualquer momento desinstalando-o. A desinstalação exclui permanentemente todos os seus dados criptografados do dispositivo. Os backups na nuvem (recurso Pro) devem ser excluídos separadamente do Google Drive ou OneDrive.</p>
+
+  <h2>10. Lei Aplicável</h2>
+  <p>Estes termos são regidos pelas leis de Portugal. Quaisquer disputas ficam sujeitas à jurisdição exclusiva dos tribunais portugueses.</p>
+
+  <h2>11. Contato</h2>
+  <p>Se tiver dúvidas sobre estes Termos de Serviço, entre em contato:</p>
+  <div class="contact-card">
+    <p style="margin:0">📧 <a href="mailto:privacy@deadmansvault.app">privacy@deadmansvault.app</a></p>
+    <p style="margin:.4rem 0 0;font-size:.85rem;color:var(--text3)">Dead Man's Vault · deadmansvault.app</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ DEUTSCH ═══════════════════════════════ -->
+<div class="section" id="s-de">
+  <span class="last-updated">Zuletzt aktualisiert: Mai 2025</span>
+
+  <div class="highlight">
+    <p>Dead Man's Vault ist ein Werkzeug zum Schutz und zur automatischen Übermittlung deiner Geheimnisse. Mit der Nutzung dieser App stimmst du diesen Bedingungen zu.</p>
+    <p class="sub">Bitte lies sie sorgfältig durch. Sie sind in einfacher Sprache verfasst — kein Juristendeutsch.</p>
+  </div>
+
+  <h2>1. Zustimmung zu den Bedingungen</h2>
+  <p>Durch das Herunterladen, Installieren oder Verwenden von Dead Man's Vault ("die App") erklärst du dich mit diesen Nutzungsbedingungen einverstanden. Wenn du nicht zustimmst, verwende die App nicht.</p>
+  <p>Diese Bedingungen gelten für alle Versionen der App — Kostenlos, Pro und Lebenslang.</p>
+
+  <h2>2. Was die App tut</h2>
+  <p>Dead Man's Vault ist eine Dead-Man's-Switch-App, die:</p>
+  <ul>
+    <li>Sensible Informationen ("Geheimnisse") mit AES-256-GCM auf deinem Gerät verschlüsselt und speichert</li>
+    <li>Deine Check-in-Aktivität überwacht und Benachrichtigungen sendet, wenn du einen Check-in verpasst</li>
+    <li>Deine Geheimnisse automatisch an bestimmte Kontakte sendet, wenn du nicht innerhalb des gewählten Intervalls eincheckst</li>
+    <li>Optional deinen GPS-Standort sendet, wenn der Schalter ausgelöst wird (Pro-Funktion)</li>
+  </ul>
+
+  <h2>3. Deine Verantwortlichkeiten</h2>
+  <h3>3.1 PIN und Sicherheit</h3>
+  <p>Du bist allein verantwortlich für die sichere Aufbewahrung deines 6-stelligen PINs und der Wiederherstellungscodes. Wenn du den Zugang zu deinem PIN und den Wiederherstellungscodes verlierst, können deine Vault-Daten nicht wiederhergestellt werden. Wir haben keinen Zugang zu deinem PIN oder deinen verschlüsselten Daten.</p>
+
+  <h3>3.2 Zustimmung der Kontakte</h3>
+  <p>Du bist dafür verantwortlich, dass jede Person, die du als Notfallkontakt hinzufügst, zugestimmt hat, automatische Nachrichten von dieser App zu erhalten. Du darfst keine Kontakte ohne deren Wissen hinzufügen.</p>
+
+  <h3>3.3 Inhalt der Geheimnisse</h3>
+  <p>Du kannst beliebige persönliche Informationen in deinem Vault speichern. Du bist allein verantwortlich für die Rechtmäßigkeit der gespeicherten Inhalte und der Informationen, die beim Auslösen des Schalters an deine Kontakte gesendet werden.</p>
+
+  <h3>3.4 Check-in-Intervalle</h3>
+  <p>Du bist verantwortlich für die Wahl eines angemessenen Check-in-Intervalls. Ein sehr kurzes Intervall (z.B. 1 Stunde) erhöht das Risiko versehentlicher Auslösungen. Wir haften nicht für unbeabsichtigte Übermittlungen durch einen verpassten Check-in.</p>
+
+  <h2>4. Einschränkungen des kostenlosen Plans</h2>
+  <p>Der kostenlose Plan umfasst:</p>
+  <ul>
+    <li>Bis zu 3 Geheimnisse</li>
+    <li>Bis zu 3 Notfallkontakte</li>
+    <li>Festes 24-Stunden-Check-in-Intervall</li>
+    <li>Werbefinanzierte Nutzung (über Google AdMob)</li>
+  </ul>
+  <p>Pro-Funktionen (konfigurierbares Intervall, GPS, Cloud-Sicherung, Gruppen, keine Werbung) erfordern ein bezahltes Abonnement oder einen einmaligen Kauf.</p>
+
+  <h2>5. Abonnements und Zahlungen</h2>
+  <h3>5.1 Pro-Abonnement</h3>
+  <p>Der Pro-Plan ist als monatliches (€2,99/Monat) oder jährliches (€24,99/Jahr) Abonnement mit 14-tägiger kostenloser Testphase verfügbar. Abonnements werden über Google Play verwaltet und unterliegen den Abrechnungsbedingungen von Google Play.</p>
+
+  <h3>5.2 Lebenslanger Zugang</h3>
+  <p>Der lebenslange Plan ist ein einmaliger Kauf (€99,99), der permanenten Zugang zu allen Pro-Funktionen gewährt, einschließlich aller zukünftigen Updates, solange die App existiert.</p>
+
+  <h3>5.3 Stornierungen und Rückerstattungen</h3>
+  <p>Du kannst dein Abonnement jederzeit über Google Play kündigen. Rückerstattungen werden gemäß der Rückerstattungsrichtlinie von Google Play bearbeitet. Wir bearbeiten keine Rückerstattungen direkt.</p>
+
+  <h2>6. Daten und Datenschutz</h2>
+  <p>Deine Geheimnisse werden auf deinem Gerät verschlüsselt und niemals an unsere Server übertragen. Wir erheben, speichern oder haben keinen Zugang zu deinen persönlichen Daten. Weitere Details findest du in unserer <a href="https://deadmansvault-app.github.io/dead-mans-vault/privacy-policy/">Datenschutzrichtlinie</a>.</p>
+
+  <h2>7. Haftungsausschlüsse</h2>
+  <h3>7.1 Keine Garantie der Zustellung</h3>
+  <p>Die App ist darauf angewiesen, dass dein Gerät betriebsbereit ist, eine Internet- oder SMS-Verbindung besteht und Hintergrundprozesse erlaubt sind. Wir können die Zustellung von Geheimnissen unter allen Umständen nicht garantieren (z.B. Gerät ausgeschaltet, keine Verbindung, OS-Einschränkungen für Hintergrundaufgaben).</p>
+
+  <h3>7.2 Keine Gewährleistung</h3>
+  <p>Die App wird "wie besehen" ohne jegliche Gewährleistung bereitgestellt. Wir garantieren nicht, dass die App ununterbrochen, fehlerfrei oder für deine spezifischen Anforderungen geeignet ist.</p>
+
+  <h3>7.3 Haftungsbeschränkung</h3>
+  <p>Im größtmöglichen gesetzlich zulässigen Umfang haften wir nicht für indirekte, zufällige, besondere oder Folgeschäden, die aus der Nutzung — oder Unfähigkeit zur Nutzung — der App entstehen, einschließlich Datenverlust, fehlgeschlagener Zustellungen oder versehentlicher Auslösungen.</p>
+
+  <h2>8. Änderungen der App und der Bedingungen</h2>
+  <p>Wir behalten uns das Recht vor, die App und diese Bedingungen jederzeit zu ändern. Wesentliche Änderungen werden per In-App-Benachrichtigung oder Update kommuniziert. Die fortgesetzte Nutzung der App nach Änderungen gilt als Zustimmung zu den neuen Bedingungen.</p>
+  <p>Wir werden niemals Funktionen aus bestehenden bezahlten Plänen entfernen, ohne eine vergleichbare Alternative oder Rückerstattung anzubieten.</p>
+
+  <h2>9. Beendigung</h2>
+  <p>Du kannst die App jederzeit durch Deinstallation beenden. Die Deinstallation löscht dauerhaft alle deine verschlüsselten Daten vom Gerät. Cloud-Backups (Pro-Funktion) müssen separat von Google Drive oder OneDrive gelöscht werden.</p>
+
+  <h2>10. Anwendbares Recht</h2>
+  <p>Diese Bedingungen unterliegen dem Recht Portugals. Alle Streitigkeiten unterliegen der ausschließlichen Zuständigkeit der portugiesischen Gerichte.</p>
+
+  <h2>11. Kontakt</h2>
+  <p>Bei Fragen zu diesen Nutzungsbedingungen kontaktiere uns bitte:</p>
+  <div class="contact-card">
+    <p style="margin:0">📧 <a href="mailto:privacy@deadmansvault.app">privacy@deadmansvault.app</a></p>
+    <p style="margin:.4rem 0 0;font-size:.85rem;color:var(--text3)">Dead Man's Vault · deadmansvault.app</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ FRANÇAIS ═══════════════════════════════ -->
+<div class="section" id="s-fr">
+  <span class="last-updated">Dernière mise à jour : mai 2025</span>
+
+  <div class="highlight">
+    <p>Dead Man's Vault est un outil pour protéger et livrer automatiquement vos secrets. En utilisant cette application, vous acceptez ces conditions.</p>
+    <p class="sub">Veuillez les lire attentivement. Elles sont rédigées en langage clair — sans jargon juridique.</p>
+  </div>
+
+  <h2>1. Acceptation des conditions</h2>
+  <p>En téléchargeant, installant ou utilisant Dead Man's Vault ("l'application"), vous acceptez d'être lié par ces Conditions d'utilisation. Si vous n'acceptez pas, n'utilisez pas l'application.</p>
+  <p>Ces conditions s'appliquent à toutes les versions de l'application — Gratuit, Pro et À vie.</p>
+
+  <h2>2. Ce que fait l'application</h2>
+  <p>Dead Man's Vault est une application dead man's switch qui :</p>
+  <ul>
+    <li>Chiffre et stocke des informations sensibles ("secrets") sur votre appareil avec AES-256-GCM</li>
+    <li>Surveille votre activité de check-in et envoie des alertes lorsque vous manquez un check-in</li>
+    <li>Livre automatiquement vos secrets aux contacts désignés si vous ne vous connectez pas dans l'intervalle choisi</li>
+    <li>Partage optionnellement votre position GPS lorsque le déclencheur s'active (fonctionnalité Pro)</li>
+  </ul>
+
+  <h2>3. Vos responsabilités</h2>
+  <h3>3.1 PIN et sécurité</h3>
+  <p>Vous êtes seul responsable de la sécurité de votre code PIN à 6 chiffres et de vos codes de récupération. Si vous perdez l'accès à votre PIN et à vos codes de récupération, les données de votre coffre ne pourront pas être récupérées. Nous n'avons pas accès à votre PIN ni à vos données chiffrées.</p>
+
+  <h3>3.2 Consentement des contacts</h3>
+  <p>Vous êtes responsable de vous assurer que toute personne ajoutée comme contact d'urgence a consenti à recevoir des messages automatiques de cette application. Vous ne devez pas ajouter des contacts à leur insu.</p>
+
+  <h3>3.3 Contenu des secrets</h3>
+  <p>Vous pouvez stocker toute information personnelle dans votre coffre. Vous êtes seul responsable de la légalité du contenu stocké et des informations envoyées à vos contacts lors du déclenchement.</p>
+
+  <h3>3.4 Intervalles de check-in</h3>
+  <p>Vous êtes responsable de définir un intervalle de check-in approprié. Un intervalle très court (ex : 1 heure) augmente le risque de déclenchements accidentels. Nous ne sommes pas responsables des livraisons involontaires causées par un check-in manqué.</p>
+
+  <h2>4. Limitations du forfait gratuit</h2>
+  <p>Le forfait gratuit comprend :</p>
+  <ul>
+    <li>Jusqu'à 3 secrets</li>
+    <li>Jusqu'à 3 contacts d'urgence</li>
+    <li>Intervalle de check-in fixe de 24 heures</li>
+    <li>Expérience avec publicités (via Google AdMob)</li>
+  </ul>
+  <p>Les fonctionnalités Pro (intervalle configurable, GPS, sauvegarde cloud, groupes, sans publicité) nécessitent un abonnement payant ou un achat à vie.</p>
+
+  <h2>5. Abonnements et paiements</h2>
+  <h3>5.1 Abonnement Pro</h3>
+  <p>Le forfait Pro est disponible en abonnement mensuel (2,99 €/mois) ou annuel (24,99 €/an), avec un essai gratuit de 14 jours. Les abonnements sont gérés via Google Play et sont soumis aux conditions de facturation de Google Play.</p>
+
+  <h3>5.2 Accès à vie</h3>
+  <p>Le forfait À vie est un achat unique (99,99 €) qui accorde un accès permanent à toutes les fonctionnalités Pro, y compris toutes les mises à jour futures, tant que l'application existe.</p>
+
+  <h3>5.3 Annulations et remboursements</h3>
+  <p>Vous pouvez annuler votre abonnement à tout moment via Google Play. Les remboursements sont traités conformément à la politique de remboursement de Google Play. Nous ne traitons pas les remboursements directement.</p>
+
+  <h2>6. Données et confidentialité</h2>
+  <p>Vos secrets sont chiffrés sur votre appareil et ne sont jamais transmis à nos serveurs. Nous ne collectons pas, ne stockons pas et n'avons pas accès à vos données personnelles. Pour plus de détails, consultez notre <a href="https://deadmansvault-app.github.io/dead-mans-vault/privacy-policy/">Politique de confidentialité</a>.</p>
+
+  <h2>7. Clauses de non-responsabilité</h2>
+  <h3>7.1 Aucune garantie de livraison</h3>
+  <p>L'application dépend du bon fonctionnement de votre appareil, de la connectivité internet ou SMS, et de l'autorisation des processus en arrière-plan. Nous ne pouvons pas garantir la livraison des secrets dans toutes les circonstances (ex : appareil éteint, pas de connectivité, restrictions OS).</p>
+
+  <h3>7.2 Aucune garantie</h3>
+  <p>L'application est fournie "en l'état" sans garanties d'aucune sorte. Nous ne garantissons pas que l'application sera ininterrompue, exempte d'erreurs ou qu'elle répondra à vos besoins spécifiques.</p>
+
+  <h3>7.3 Limitation de responsabilité</h3>
+  <p>Dans la mesure maximale permise par la loi applicable, nous ne serons pas responsables des dommages indirects, accessoires, spéciaux ou consécutifs résultant de l'utilisation — ou de l'impossibilité d'utiliser — l'application, y compris la perte de données, les échecs de livraison ou les déclenchements accidentels.</p>
+
+  <h2>8. Modifications de l'application et des conditions</h2>
+  <p>Nous nous réservons le droit de modifier l'application et ces conditions à tout moment. Les changements importants seront communiqués via une notification dans l'application ou une mise à jour. L'utilisation continue de l'application après les modifications constitue une acceptation des nouvelles conditions.</p>
+  <p>Nous ne supprimerons jamais des fonctionnalités des forfaits payants existants sans proposer une alternative comparable ou un remboursement.</p>
+
+  <h2>9. Résiliation</h2>
+  <p>Vous pouvez cesser d'utiliser l'application à tout moment en la désinstallant. La désinstallation supprime définitivement toutes vos données chiffrées de l'appareil. Les sauvegardes cloud (fonctionnalité Pro) doivent être supprimées séparément de Google Drive ou OneDrive.</p>
+
+  <h2>10. Droit applicable</h2>
+  <p>Ces conditions sont régies par le droit portugais. Tout litige sera soumis à la juridiction exclusive des tribunaux portugais.</p>
+
+  <h2>11. Contact</h2>
+  <p>Pour toute question concernant ces Conditions d'utilisation, contactez-nous :</p>
+  <div class="contact-card">
+    <p style="margin:0">📧 <a href="mailto:privacy@deadmansvault.app">privacy@deadmansvault.app</a></p>
+    <p style="margin:.4rem 0 0;font-size:.85rem;color:var(--text3)">Dead Man's Vault · deadmansvault.app</p>
+  </div>
+</div>
+
+</div><!-- .content -->
+
+<footer>
+  &copy; 2025 Dead Man's Vault &middot;
+  <a href="https://deadmansvault-app.github.io/dead-mans-vault/" style="color:var(--text3)">Home</a> &middot;
+  <a href="https://deadmansvault-app.github.io/dead-mans-vault/privacy-policy/" style="color:var(--text3)">Privacy Policy</a> &middot;
+  <a href="mailto:privacy@deadmansvault.app" style="color:var(--text3)">privacy@deadmansvault.app</a>
+</footer>
+
+<script>
+const subtitles = {
+  en: 'Terms of Service', pt: 'Termos de Serviço',
+  br: 'Termos de Serviço', de: 'Nutzungsbedingungen', fr: "Conditions d'utilisation"
+};
+function setLang(lang, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('s-' + lang).classList.add('active');
+  btn.classList.add('active');
+  document.getElementById('header-subtitle').textContent = subtitles[lang];
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
